@@ -31,7 +31,7 @@ Lively：在“添加壁纸”中选 ZIP，元数据入口是 `LivelyInfo.json`�
 
 ## 分享模板源码
 
-本模板建议使用 GitHub 仓库名 `frac-interactive-wallpaper`，展示标题为「FRAC_桌面互动壁纸 · 开源 DIY 模板」。壁纸在宿主中的名称由 `content/project.json` 的 `title` 控制，当前为「FRAC_桌面互动壁纸」。这些名称不代表已创建远程仓库。
+本模板使用仓库名 `frac-interactive-wallpaper`，展示标题为「FRAC_桌面互动壁纸 · 开源 DIY 模板」。壁纸在宿主中的名称由 `content/project.json` 的 `title` 控制，当前为「FRAC_桌面互动壁纸」。
 
 ```powershell
 python -X utf8 tools/project.py source
