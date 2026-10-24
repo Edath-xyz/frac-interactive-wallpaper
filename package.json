@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "FRAC interactive wallpaper DIY development tools; never bundled in wallpapers",
-  "license": "MIT",
+  "license": "0BSD",
   "engines": {"node": ">=22.12.0"},
   "scripts": {
     "build": "python tools/project.py build",

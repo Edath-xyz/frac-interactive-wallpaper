@@ -36,7 +36,7 @@ def build(root=ROOT,host='wallpaper-engine'):
     tokens={'title':project['title'],'prefsKey':prefs,'brand':project['brand'],'tagline':project['tagline'],'wardrobeTitle':project['wardrobeTitle'],
         'collectionLabel':project['brand']+' / COLLECTION','defaultName':default['name'],'defaultStill':'images/look-'+default['id']+'.jpg',
         'defaultBackground':'images/'+next(g['empty'] for g in wardrobes if g['id']==default['wardrobe']),
-        'credit':project['author'],'dialogueInterval':str(project['dialogueIntervalSeconds'])}
+        'dialogueInterval':str(project['dialogueIntervalSeconds'])}
     template=(src/'index.html').read_text('utf-8')
     for key,value in tokens.items(): template=template.replace('{{'+key+'}}',html.escape(value,quote=True))
     tabs=''.join(f'<button type="button" data-wardrobe="{g["id"]}" aria-pressed="false"><span>{i+1:02d}</span>{html.escape(g["name"])}</button>' for i,g in enumerate(groups))
@@ -57,7 +57,7 @@ def build(root=ROOT,host='wallpaper-engine'):
         generated['project.json']=json.dumps(metadata,ensure_ascii=False,indent=2)+'\n'
     else:
         generated['LivelyInfo.json']=json.dumps({'AppVersion':'2.2.1.0','Title':project['title'],'Thumbnail':'preview.jpg','Preview':None,'Desc':project['description'],
-            'Author':project['author'],'License':'MIT (code); see CONTENT-LICENSE.md for samples','Contact':None,'Type':1,'FileName':'index.html','Arguments':'--pause-event true',
+            'Author':project['author'],'License':'0BSD (code); see CONTENT-LICENSE.md for samples','Contact':None,'Type':1,'FileName':'index.html','Arguments':'--pause-event true',
             'IsAbsolutePath':False,'Id':None,'Tags':['互动','陪伴'],'Version':1},ensure_ascii=False,indent=2)+'\n'
     assets={}
     for id,item in specs.items():

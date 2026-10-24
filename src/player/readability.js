@@ -4,7 +4,7 @@
   const KEY = '__PURPLE_READING_KEY__';
   const body = document.body, wardrobe = document.querySelector('.wardrobe');
   const footer = document.querySelector('.bottom-bar');
-  const status = document.querySelector('.now-playing'), credit = document.querySelector('.credit');
+  const status = document.querySelector('.now-playing');
   const statusContent = status.querySelector('div'), statusText = status.querySelector('p');
   const immersion = document.querySelector('#immerseButton span');
   const wake = document.getElementById('wakeButton'), wakeText = wake.querySelector('span:not(.wake-line)');
@@ -49,15 +49,9 @@
       setLength('--wake-right', innerWidth - textRight - trailingWidth());
       setLength('--wake-bottom', innerHeight - textBottom(immersion) + footerShift + textBottom(wakeText) - wake.getBoundingClientRect().bottom);
     }
-    // Anchor the classic-layout credit under the right-hand label, independently of the left column.
-    // Narrow layouts hide that label; use the remaining button as the anchor there.
+    // Narrow layouts hide the immersion label; align dialogue with the button there.
     const anchor = getComputedStyle(immersion).display === 'none' ? box : textRect(immersion);
     const target = anchor.bottom - footerShift;
-    const creditBox = credit.getBoundingClientRect(), creditText = textRect(credit);
-    const gap = Math.max(12, parseFloat(getComputedStyle(credit).fontSize) * 4 / 3);
-    const creditBottom = parseFloat(getComputedStyle(credit).bottom);
-    setLength('--creator-right', innerWidth - anchor.right - (creditBox.right - creditText.right));
-    setLength('--creator-bottom', creditBottom + creditText.top - target - gap);
     if (getComputedStyle(status).display === 'none') {
       root.style.removeProperty('--companion-top');
       return;
@@ -127,7 +121,7 @@
   window.addEventListener('purple:layout-change', scheduleFit);
   window.addEventListener('purple:reset-settings', () => { size = 'standard'; apply(); });
   const observer = new ResizeObserver(scheduleFit);
-  [wardrobe, status, statusContent, credit, footer, document.querySelector('.topbar')].forEach(element => observer.observe(element));
+  [wardrobe, status, statusContent, footer, document.querySelector('.topbar')].forEach(element => observer.observe(element));
   document.fonts.ready.then(scheduleFit);
   apply();
 })();
