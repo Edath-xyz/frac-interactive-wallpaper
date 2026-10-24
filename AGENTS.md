@@ -1,6 +1,6 @@
 # 本地 AI 工作入口
 
-这是独立的 PURPLE DIY 模板。只以本仓库文件和用户当前要求为依据；不依赖作者的其他工程、磁盘、私人聊天或旧交付包。
+这是独立的 FRAC_桌面互动壁纸 DIY 模板。只以本仓库文件和用户当前要求为依据；不依赖作者的其他工程、磁盘、私人聊天或旧交付包。
 
 1. 先读 README、`docs/ARCHITECTURE.md`，运行 `python tools/project.py doctor`；检查已有 Git 修改，不覆盖用户未提交内容。
 2. 视频任务读 `docs/MEDIA.md`；对白任务读 `docs/DIALOGUE.md`；发布任务读 `docs/PUBLISH.md`。按任务读取，勿整库扫描视频或历史缓存。

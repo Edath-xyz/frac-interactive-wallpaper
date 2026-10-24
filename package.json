@@ -2,7 +2,7 @@
   "name": "purple-wallpaper-template",
   "version": "1.0.0",
   "private": true,
-  "description": "PURPLE DIY wallpaper development tools; never bundled in wallpapers",
+  "description": "FRAC interactive wallpaper DIY development tools; never bundled in wallpapers",
   "license": "MIT",
   "engines": {"node": ">=22.12.0"},
   "scripts": {
