@@ -1,0 +1,23 @@
+{
+  "id": "sit-sample",
+  "name": "簪花小令",
+  "english": "SEATED / 13",
+  "wardrobe": "sit",
+  "hostValue": 2,
+  "kind": "departure",
+  "freeze": 6.8,
+  "duration": 12.033333333333333,
+  "fps": 60.0,
+  "video": "video.webm",
+  "cover": "cover.jpg",
+  "still": "still.jpg",
+  "qualities": {},
+  "dialogue": "dialogue.json",
+  "sample": true,
+  "transition": {
+    "lead": 0.5,
+    "fade": 0.4
+  },
+  "width": 1920,
+  "height": 1080
+}

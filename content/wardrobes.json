@@ -1,0 +1,33 @@
+[
+  {
+    "id": "classic",
+    "name": "咫尺偏爱",
+    "english": "CLOSER, TOGETHER",
+    "defaultLook": "classic-sample",
+    "background": "content/backgrounds/empty.jpg",
+    "looks": [
+      "classic-sample"
+    ]
+  },
+  {
+    "id": "sit",
+    "name": "片刻倾心",
+    "english": "A SEAT IN PURPLE",
+    "defaultLook": "sit-sample",
+    "background": "content/backgrounds/empty-purple.jpg",
+    "looks": [
+      "sit-sample",
+      "sit-companion"
+    ]
+  },
+  {
+    "id": "recline",
+    "name": "慵懒依偎",
+    "english": "SLOW AFTERNOONS",
+    "defaultLook": "recline-sample",
+    "background": "content/backgrounds/empty-purple.jpg",
+    "looks": [
+      "recline-sample"
+    ]
+  }
+]

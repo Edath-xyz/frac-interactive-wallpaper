@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+node_modules/
+preview/
+dist/
+.qa/
+.history/
+.tools/
+.DS_Store
+Thumbs.db
+# Four selected source samples are intentionally tracked; do not ignore content/.

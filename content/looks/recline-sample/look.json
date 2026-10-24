@@ -1,0 +1,19 @@
+{
+  "id": "recline-sample",
+  "name": "紫暮长靴",
+  "english": "RECLINING / 01",
+  "wardrobe": "recline",
+  "hostValue": 4,
+  "kind": "entry",
+  "freeze": 11.7,
+  "duration": 12.016666666666667,
+  "fps": 60.0,
+  "video": "video.webm",
+  "cover": "cover.jpg",
+  "still": "still.jpg",
+  "qualities": {},
+  "dialogue": "dialogue.json",
+  "sample": true,
+  "width": 1920,
+  "height": 1080
+}

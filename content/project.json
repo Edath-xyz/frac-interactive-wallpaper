@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "purple-diy-demo",
+  "title": "PURPLE · DIY 示例",
+  "author": "FRAC_LAB",
+  "brand": "PURPLE",
+  "tagline": "MAKE IT YOURS",
+  "wardrobeTitle": "她的衣橱",
+  "characterName": "她",
+  "description": "四套样片，三个衣橱。仅供学习和本地预览；发布自己的作品前请替换示例素材与对白。",
+  "defaultLook": "classic-sample",
+  "defaultQuality": "original",
+  "sound": true,
+  "volume": 35,
+  "dialogueIntervalSeconds": 30,
+  "affectionAfter": 5,
+  "sample": true
+}

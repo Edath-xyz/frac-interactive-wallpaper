@@ -1,0 +1,97 @@
+{
+  "enabled": true,
+  "entries": [
+    {
+      "id": "entry-1",
+      "enter": "这条牛仔裤总算配上合适的上衣了。",
+      "held": "原本只想试试看，结果比穿裙子还喜欢。"
+    },
+    {
+      "id": "entry-2",
+      "enter": "今天不想穿得太乖，就这样来见你了。",
+      "held": "有蕾丝，也有牛仔裤，今天两个都想要。"
+    }
+  ],
+  "continuous": [
+    {
+      "id": "continuous-1",
+      "text": "两个人出门都说随便，最后会走到哪儿呀？我觉得八成会先饿。",
+      "topic": "outing"
+    },
+    {
+      "id": "continuous-2",
+      "text": "想跟你去一次夜市，买两种不一样的。这样就有理由尝你那份了。",
+      "topic": "outing"
+    },
+    {
+      "id": "continuous-3",
+      "text": "有时候挑了半天衣服，还是换回最开始那套。今天这条牛仔裤就是。",
+      "topic": "clothing"
+    },
+    {
+      "id": "continuous-4",
+      "text": "下次给你发消息，我想试试只发一句“想见你”。不先问你在干嘛了。",
+      "topic": "affection"
+    },
+    {
+      "id": "continuous-5",
+      "text": "想听你讲件自己的糗事。我的也可以讲，不过你笑的时候稍微收着点呀。",
+      "topic": "story"
+    },
+    {
+      "id": "continuous-6",
+      "text": "下次拍合照，别总让我一个人找角度呀。你也往我这边挤一点。",
+      "topic": "touch"
+    },
+    {
+      "id": "continuous-7",
+      "text": "我偶尔也会想耍赖的。比如猜拳输了，还想拉着你再来一次。",
+      "topic": "play"
+    },
+    {
+      "id": "continuous-8",
+      "text": "我未必懂你的爱好，可你讲得起劲的时候，我还挺想继续听的。",
+      "topic": "care"
+    },
+    {
+      "id": "continuous-9",
+      "text": "突然想和你比比手掌大小。我的手看着也不小，不知道放在你手里会怎样。",
+      "topic": "touch"
+    },
+    {
+      "id": "continuous-10",
+      "text": "约会我会偷偷早到一点，再假装自己也刚来。免得你太得意。",
+      "topic": "outing"
+    }
+  ],
+  "restored": [
+    {
+      "id": "restored-1",
+      "text": "聊点什么呀？我今天不挑话题。"
+    },
+    {
+      "id": "restored-2",
+      "text": "嗯，随你起个头，我很容易聊跑题的。"
+    }
+  ],
+  "random": [
+    {
+      "id": "random-1",
+      "text": "这回穿牛仔裤，陪你随意一点。"
+    },
+    {
+      "id": "random-2",
+      "text": "黑色上衣配这条裤子，果然没挑错。"
+    }
+  ],
+  "affection": [
+    {
+      "id": "affection-1",
+      "text": "想把手伸进你外套口袋里，跟你的手藏在一起。这样走路应该会很暖吧。"
+    },
+    {
+      "id": "affection-2",
+      "text": "要是你坐在旁边，我想先亲一下你的下巴。然后就靠着你，不说话了。"
+    }
+  ]
+}

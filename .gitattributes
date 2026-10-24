@@ -1,0 +1,9 @@
+* text=auto eol=lf
+*.webm -text
+*.jpg -text
+*.png -text
+*.py text eol=lf
+*.js text eol=lf
+*.cjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf

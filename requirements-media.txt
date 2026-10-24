@@ -1,0 +1,3 @@
+# Only needed for adding/replacing videos and color-consistent JPEG extraction.
+# Basic builds use Python's standard library.
+Pillow==11.1.0

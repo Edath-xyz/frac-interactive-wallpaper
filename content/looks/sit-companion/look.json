@@ -1,0 +1,21 @@
+{
+  "id": "sit-companion",
+  "name": "靛蓝晚风",
+  "english": "SEATED / COMPANION",
+  "wardrobe": "sit",
+  "hostValue": 3,
+  "kind": "companion",
+  "freeze": 8.0,
+  "duration": 20.766666666666666,
+  "fps": 60.0,
+  "video": "video.webm",
+  "cover": "cover.jpg",
+  "still": "still.jpg",
+  "qualities": {},
+  "dialogue": "dialogue.json",
+  "sample": true,
+  "loopStart": 8.0,
+  "loopEnd": 20.766666666666666,
+  "width": 1920,
+  "height": 1080
+}

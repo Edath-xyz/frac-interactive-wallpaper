@@ -1,0 +1,19 @@
+{
+  "id": "classic-sample",
+  "name": "薄纱晚风",
+  "english": "NO OCCASION NEEDED",
+  "wardrobe": "classic",
+  "hostValue": 1,
+  "kind": "entry",
+  "freeze": 11.23,
+  "duration": 12.033333333333333,
+  "fps": 60.0,
+  "video": "video.webm",
+  "cover": "cover.jpg",
+  "still": "still.jpg",
+  "qualities": {},
+  "dialogue": "dialogue.json",
+  "sample": true,
+  "width": 1920,
+  "height": 1080
+}
