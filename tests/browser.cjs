@@ -25,7 +25,7 @@ const frames=page=>page.evaluate(()=>new Promise(resolve=>{let n=0;const step=()
     page.on('requestfailed',r=>{if(!/ABORTED/.test(r.failure()?.errorText||''))report.errors.push({host,url:r.url(),error:r.failure()});});
     const preview=path.join(root,'preview',host),url=pathToFileURL(path.join(preview,'index.html')).href;
     const key='purple-diy.'+project.id+'.'+host+'.v1';
-    const bootstrap=await page.evaluateOnNewDocument(key=>localStorage.setItem(key,JSON.stringify({autoHide:false,sound:false,welcomeSeen:true})),key);
+    const bootstrap=await page.evaluateOnNewDocument(key=>localStorage.setItem(key,JSON.stringify({autoHide:false,sound:false,welcomeSeen:true,quality:'original'})),key);
     await page.goto(url,{waitUntil:'load'});
     await page.removeScriptToEvaluateOnNewDocument(bootstrap.identifier);
     await page.waitForFunction(()=>window.purpleLayoutBridge && document.querySelector('#still').naturalWidth>0);
@@ -82,7 +82,7 @@ const frames=page=>page.evaluate(()=>new Promise(resolve=>{let n=0;const step=()
     const seed={catalogIds:oldIds,current:oldIds.indexOf(selected.id),favorites:[oldIds.indexOf(selected.id),oldIds.length-1],
       freezes:oldIds.map(id=>id===selected.id?custom:looks.find(x=>x.id===id)?.freeze+.2),
       defaultFrames:Object.fromEntries(looks.map(x=>[x.id,x.freeze+.2])),
-      wardrobeLooks:{[selected.group]:oldIds.indexOf(selected.id)},playbackMode:'freeze',autoHide:false,sound:false,welcomeSeen:true};
+      wardrobeLooks:{[selected.group]:oldIds.indexOf(selected.id)},playbackMode:'freeze',quality:'original',autoHide:false,sound:false,welcomeSeen:true};
     await page.evaluate(({key,seed})=>{localStorage.setItem(key,JSON.stringify(seed));localStorage.setItem(key+'.interface','normal');localStorage.setItem('unrelated.keep','untouched');},{key,seed});
     await page.reload({waitUntil:'load'});
     await page.waitForFunction(({id,time})=>window.purpleLayoutBridge?.current().id===id&&purpleLayoutBridge.current().phase==='held'&&[...document.querySelectorAll('video')].some(v=>v.classList.contains('visible')&&Math.abs(v.currentTime-time)<.1),{},{id:selected.id,time:custom});
