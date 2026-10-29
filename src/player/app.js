@@ -35,7 +35,7 @@
     const open = group.baseOrder.filter(isPlayable);
     const ordered = [...(reversed ? open.reverse() : open), ...group.baseOrder.filter(i => !isPlayable(i))];
     group.chapters = Array.from({length: Math.ceil(ordered.length / 4)}, (_, page) => ({
-      name: reversed ? '随心翻阅' : group.chapterNames[page], looks: ordered.slice(page * 4, page * 4 + 4)
+      name: reversed ? 'Browse Freely' : group.chapterNames[page], looks: ordered.slice(page * 4, page * 4 + 4)
     }));
   }
   const $ = id => document.getElementById(id);
@@ -319,8 +319,8 @@
       const look = {...LOOKS[i], name: escapeHTML(LOOKS[i].name), short: escapeHTML(LOOKS[i].short)};
       const locked = !isPlayable(i);
       const thumb = `thumb-${look.id}`;
-      const companionCover = !locked && look.companion ? '<span class="companion-art" aria-hidden="true"><span class="companion-seal"><svg viewBox="0 0 24 12"><path d="M12 6C9 1 6 1 4 2S1 5 2 8s5 3 8-1l4-3c3-4 7-3 8 0s-1 6-4 6-5-3-6-4Z"/></svg></span><span class="companion-sign">动态陪伴</span></span>' : '';
-      return `<div class="look-card${companionCover ? ' companion-card' : ''}${locked ? ' is-locked' + (look.blurLocked ? ' blur-cover' : '') : ''}" data-look="${i}"><button class="look-select" data-select="${i}" ${companionCover ? 'aria-description="点击后自动开启动态陪伴"' : ''} aria-label="${locked ? look.name + '，私藏，未开放' : '选择' + look.name + '，播放入场'}" ${locked ? 'aria-disabled="true"' : 'aria-pressed="false"'}><div class="look-image"><img src="images/${thumb}.jpg" alt="${look.name}${locked ? '模糊封面' : '穿搭封面'}" draggable="false"><span class="look-index">${displayNumber(i)}</span>${locked ? '<span class="lock-veil"><svg><use href="#i-lock"/></svg><span>' + '未开放' + '</span></span>' : '<span class="look-check"><svg><use href="#i-check"/></svg></span>'}${companionCover}</div></button><div class="look-bottom"><span class="look-short">${look.short}</span>${locked ? '' : '<button class="favorite-button" data-favorite="' + i + '" aria-label="偏爱' + look.name + '" aria-pressed="false"><svg><use href="#i-heart"/></svg></button>'}</div></div>`;
+      const companionCover = !locked && look.companion ? '<span class="companion-art" aria-hidden="true"><span class="companion-seal"><svg viewBox="0 0 24 12"><path d="M12 6C9 1 6 1 4 2S1 5 2 8s5 3 8-1l4-3c3-4 7-3 8 0s-1 6-4 6-5-3-6-4Z"/></svg></span><span class="companion-sign">Dynamic Companion</span></span>' : '';
+      return `<div class="look-card${companionCover ? ' companion-card' : ''}${locked ? ' is-locked' + (look.blurLocked ? ' blur-cover' : '') : ''}" data-look="${i}"><button class="look-select" data-select="${i}" ${companionCover ? 'aria-description="Click to automatically enable Dynamic Companion"' : ''} aria-label="${locked ? look.name + '，私藏，未开放' : '选择' + look.name + '，播放入场'}" ${locked ? 'aria-disabled="true"' : 'aria-pressed="false"'}><div class="look-image"><img src="images/${thumb}.jpg" alt="${look.name}${locked ? '模糊封面' : '穿搭封面'}" draggable="false"><span class="look-index">${displayNumber(i)}</span>${locked ? '<span class="lock-veil"><svg><use href="#i-lock"/></svg><span>' + '未开放' + '</span></span>' : '<span class="look-check"><svg><use href="#i-check"/></svg></span>'}${companionCover}</div></button><div class="look-bottom"><span class="look-short">${look.short}</span>${locked ? '' : '<button class="favorite-button" data-favorite="' + i + '" aria-label="偏爱' + look.name + '" aria-pressed="false"><svg><use href="#i-heart"/></svg></button>'}</div></div>`;
     }).join('');
     $('chapterName').textContent = CHAPTERS[page].name;
     $('pageTabs').innerHTML = CHAPTERS.map((chapter, i) => `<button data-page="${i}" aria-label="第 ${i + 1} 页，${escapeHTML(chapter.name)}">${String(i + 1).padStart(2, '0')}</button>`).join('');
@@ -366,30 +366,30 @@
       card.classList.toggle('active', i === current);
       card.querySelector('.look-select').setAttribute('aria-pressed', String(i === current));
       card.querySelector('.favorite-button').setAttribute('aria-pressed', String(prefs.favorites.includes(i)));
-      card.querySelector('.favorite-button').setAttribute('aria-label', `${prefs.favorites.includes(i) ? '取消偏爱' : '偏爱'}${LOOKS[i].name}`);
+      card.querySelector('.favorite-button').setAttribute('aria-label', `${prefs.favorites.includes(i) ? 'Remove Favorite' : 'Favorite'}${LOOKS[i].name}`);
     });
     $('lookName').textContent = LOOKS[current].name;
     $('lookEnglish').textContent = LOOKS[current].english || wardrobeFor(current).english;
     $('lookNumber').textContent = displayNumber(current);
     const away = wardrobe !== wardrobeFor(current) || page !== pageFor(current);
     $('showCurrent').hidden = !away;
-    $('selectionState').textContent = phase === 'held' ? '当前定格' : '当前穿搭';
+    $('selectionState').textContent = phase === 'held' ? 'Current Freeze Frame' : 'Current Outfit';
     updateRandomLabel();
     renderPlaybackMode();
   }
   function updateRandomLabel() {
     const count = activeFavorites().length;
     const favoritesOnly = randomFavoritesOnly();
-    if (!spinning) $('randomText').textContent = favoritesOnly ? '从偏爱中选' : '交给心动';
-    $('randomHint').textContent = favoritesOnly && count === 1 ? '仅 1 套' : '随机一套';
-    $('randomButton').setAttribute('aria-label', favoritesOnly ? count === 1 ? '本组仅有一套偏爱：' + LOOKS[activeFavorites()[0]].name : `从本组 ${count} 套偏爱中随机选择` : '从当前衣橱全部开放穿搭中随机选择一套');
-    $('randomScope').textContent = favoritesOnly ? count === 1 ? '本组仅 1 套偏爱 · 点亮爱心可加入更多' : `仅本组 ${count} 套偏爱 · 不连续重复` : `${wardrobe.name} · ${activeAvailable().length} 套穿搭 · 不连续重复`;
+    if (!spinning) $('randomText').textContent = favoritesOnly ? 'Pick from Favorites' : 'Let Fate Decide';
+    $('randomHint').textContent = favoritesOnly && count === 1 ? 'Only 1 Outfit' : 'Random Outfit';
+    $('randomButton').setAttribute('aria-label', favoritesOnly ? count === 1 ? 'Only one favorite in this wardrobe: ' + LOOKS[activeFavorites()[0]].name : `Randomly choose from this wardrobe's ${count} favorites` : 'Randomly choose an available outfit from the current wardrobe');
+    $('randomScope').textContent = favoritesOnly ? count === 1 ? 'Only 1 favorite in this wardrobe · Tap hearts to add more' : `Only ${count} favorites in this wardrobe · No consecutive repeats` : `${wardrobe.name} · ${activeAvailable().length} outfits · No consecutive repeats`;
     $('randomFavoriteCount').textContent = count;
     document.querySelectorAll('[data-random-scope]').forEach(button => {
       const favorites = button.dataset.randomScope === 'favorites';
       button.setAttribute('aria-pressed', String(favorites === favoritesOnly));
       button.disabled = favorites && !count;
-      button.title = favorites && !count ? '先点亮本组穿搭旁的爱心' : '';
+      button.title = favorites && !count ? 'Tap the heart next to an outfit in this wardrobe first' : '';
     });
   }
   function applyPrefs() {
@@ -408,13 +408,13 @@
     spare.muted = true;
     renderPlaybackMode();
     icon($('soundButton'), prefs.sound ? 'volume' : 'mute');
-    $('soundButton').setAttribute('aria-label', prefs.sound ? '关闭声音' : '开启声音');
-    $('soundButton').title = prefs.sound ? '关闭声音' : '开启声音';
+    $('soundButton').setAttribute('aria-label', prefs.sound ? 'Turn Sound Off' : 'Turn Sound On');
+    $('soundButton').title = prefs.sound ? 'Turn Sound Off' : 'Turn Sound On';
     $('soundButton').setAttribute('aria-pressed', String(prefs.sound));
     $('soundToggle').checked = prefs.sound;
     $('soundToggle').setAttribute('aria-expanded', String(prefs.sound));
     $('soundVolume').hidden = !prefs.sound;
-    $('soundState').textContent = !prefs.sound ? '已静音' : prefs.volume === 0 ? '声音已开启 · 当前音量为 0' : '声音已开启';
+    $('soundState').textContent = !prefs.sound ? 'Muted' : prefs.volume === 0 ? 'Sound On · Volume Currently 0' : 'Sound On';
     scheduleIdleHide();
   }
   function activity(force = false) {
@@ -536,11 +536,11 @@
     $('loading').hidden = true;
     clearTimeout(loadingTimer);
     updateProgress(freezeTime());
-    $('timelineState').textContent = '定格';
-    $('selectionState').textContent = '当前定格';
+    $('timelineState').textContent = 'Frozen';
+    $('selectionState').textContent = 'Current Freeze Frame';
     icon($('playButton'), 'repeat');
-    $('playButton').setAttribute('aria-label', '再看一次入场');
-    $('playButton').title = '再看一次入场';
+    $('playButton').setAttribute('aria-label', 'Replay Entrance');
+    $('playButton').title = 'Replay Entrance';
     setStatus('MOMENT, KEPT.', line(current, 'held'));
     readyControls(false);
     if (isAutomaticOperation()) scheduleIdleHide();
@@ -684,8 +684,8 @@
       phase = 'paused';
       body.classList.remove('is-playing');
       renderTransport();
-      setStatus('READY WHEN YOU ARE.', fixedLine('ready', '点一下播放，等你。'));
-      if (!isAutomaticOperation() && error.name !== 'NotAllowedError') toast('播放暂时中断，点播放继续。', '播放提示');
+      setStatus('READY WHEN YOU ARE.', fixedLine('ready', 'Tap play when you are ready.'));
+      if (!isAutomaticOperation() && error.name !== 'NotAllowedError') toast('Playback was interrupted. Tap Play to continue.', 'Playback Notice');
     }
   }
   function loadFailure(index, error, id) {
@@ -697,15 +697,15 @@
     phase = 'error';
     video.pause(); video.classList.remove('visible');
     $('still').src = `images/look-${LOOKS[index].id}.jpg`;
-    $('still').alt = LOOKS[index].name + '穿搭推荐定格';
+    $('still').alt = LOOKS[index].name + ' Recommended Outfit Freeze Frame';
     $('curtain').classList.remove('closed');
     $('loading').hidden = true;
     clearTimeout(loadingTimer);
     body.classList.remove('is-playing');
-    setStatus('A LITTLE PAUSE.', '视频暂时无法播放，点击下方「重试」。');
+    setStatus('A LITTLE PAUSE.', 'The video cannot be played right now. Click “Retry” below.');
     readyControls(false);
     if (isAutomaticOperation()) scheduleIdleHide();
-    else { toast('视频暂时无法播放，可以点「重试」或换一套。', '播放提示'); activity(true); }
+    else { toast('The video cannot be played right now. Click “Retry” or choose another outfit.', 'Playback Notice'); activity(true); }
   }
   async function selectLook(index, { restore = false, entry = 'enter', allowAffection = true, preserveRandom = false, quiet = false, automatic = false, directChoice = false } = {}) {
     if (!isPlayable(index)) { lockedTap(index); return; }
@@ -742,9 +742,9 @@
       setStatus(wardrobe.english, LOOKS[index].silent ? '' : companionClip(index) ? LOOKS[index].name : line(index, 'held'));
     }
     if (!globalMode() && changedWardrobe && prefs.wardrobeModes[wardrobe.id] === 'favorites' && !activeFavorites().length) {
-      toast('这个衣橱还没有偏爱，暂用定格模式。其他衣橱的播放方式已保留。', '播放方式');
+      toast('This wardrobe has no favorites yet, so Freeze Frame mode is being used temporarily. Playback settings for other wardrobes are preserved.', 'Playback Mode');
     }
-    if (leftGlobalFavorites) toast('这套尚未收藏，已切换到定格模式。', '播放方式');
+    if (leftGlobalFavorites) toast('This outfit is not in your favorites, so playback has switched to Freeze Frame mode.', 'Playback Mode');
     if (page !== pageFor(index)) setPage(pageFor(index), false, !automatic);
     phase = 'loading';
     readyControls(true);
@@ -753,7 +753,7 @@
     if (!quiet) activity(true);
     // Keep the current line during the short transition; speak once entry starts.
     clearTimeout(replyTimer);
-    $('timelineState').textContent = '准备';
+    $('timelineState').textContent = 'Preparing';
     $('curtain').classList.add('closed');
     if (!automatic) loadingTimer = setTimeout(() => { if (task.id === operation && canShowLoadingHint()) $('loading').hidden = false; }, 900);
     try {
@@ -765,7 +765,7 @@
       commitPreparedDeck(incoming, index, task.id);
       releaseSpare();
       $('still').src = `images/look-${LOOKS[index].id}.jpg`;
-      $('still').alt = LOOKS[index].name + '穿搭推荐定格';
+      $('still').alt = LOOKS[index].name + ' Recommended Outfit Freeze Frame';
       document.querySelector('.ambient').style.backgroundImage = `url("images/look-${LOOKS[index].id}.jpg")`;
       await delay(40);
       if (task.id !== operation) return;
@@ -797,12 +797,12 @@
       blockCompanionSpeech();
       phase = 'paused'; cancelCompanionSwap(); video.pause(); stopWatcher(); body.classList.remove('is-playing');
       clearLoadingHint();
-      icon($('playButton'), 'play'); $('playButton').setAttribute('aria-label', '继续播放入场');
-      $('timelineState').textContent = '暂停'; setStatus('TAKE YOUR TIME.', line(current, 'pause'));
+      icon($('playButton'), 'play'); $('playButton').setAttribute('aria-label', 'Resume Entrance');
+      $('timelineState').textContent = 'Paused'; setStatus('TAKE YOUR TIME.', line(current, 'pause'));
     } else if (phase === 'paused') {
       phase = 'playing'; body.classList.add('is-playing');
-      icon($('playButton'), 'pause'); $('playButton').setAttribute('aria-label', '暂停入场');
-      $('timelineState').textContent = '入场'; setStatus('HERE, WITH YOU.', line(current, 'resume'));
+      icon($('playButton'), 'pause'); $('playButton').setAttribute('aria-label', 'Pause Entrance');
+      $('timelineState').textContent = 'Entrance'; setStatus('HERE, WITH YOU.', line(current, 'resume'));
       if (cycling() && video.ended) advanceLoop(); else playSafely(operation);
     } else selectLook(current, { entry: 'replay' });
     renderTransport();
@@ -826,13 +826,13 @@
     closeWelcome();
     unlockAudio();
     const pool = randomPool();
-    if (!pool.length) { toast('本组还没有偏爱，点亮穿搭旁的爱心后再来选吧。', '随机范围'); return; }
+    if (!pool.length) { toast('There are no favorites in this wardrobe yet. Tap the hearts next to outfits to add some.', 'Random Selection'); return; }
     if (pool.length === 1) {
       const selected = pool[0];
       const alreadySelected = selected === current;
       if (!alreadySelected) selectLook(selected, {quiet: true});
       lastChange = Date.now();
-      toast(alreadySelected ? '本组只有这一套偏爱，已经在这里了。点亮其他穿搭的心，就能一起随机。' : '本组只有这一套偏爱，已为你选中。', '随机范围');
+      toast(alreadySelected ? 'This wardrobe has only one favorite, and it is already selected. Favorite other outfits to include them in the random selection.' : 'This wardrobe has only one favorite. It has been selected for you.', 'Random Selection');
       activity(true);
       return;
     }
@@ -849,7 +849,7 @@
     }
     if (page !== pageFor(selected)) setPage(pageFor(selected), false);
     $('randomButton').disabled = true;
-    $('randomText').textContent = '心动挑选中';
+    $('randomText').textContent = 'Choosing Your Outfit';
     body.classList.add('is-spinning'); activity(true); syncTransition();
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const rounds = reduced ? 1 : 12;
@@ -907,7 +907,7 @@
     $('momentLook').textContent = LOOKS[current].name;
     const words = line(current, 'edit');
     setStatus('FIND YOUR MOMENT.', words);
-    $('momentHint').textContent = '点击时间轴定位，用 −／＋ 逐帧微调。';
+    $('momentHint').textContent = 'Click the timeline to seek, then use −/+ to fine-tune frame by frame.';
     try {
       await ensureLoaded(current, task.signal);
       await seek(editorOriginal.time, task.signal);
@@ -944,15 +944,15 @@
         phase = 'playing'; body.classList.add('is-playing');
         setStatus(original.status.label, original.status.text);
         icon($('playButton'), 'pause');
-        $('playButton').setAttribute('aria-label', '暂停入场');
-        $('timelineState').textContent = '入场';
+        $('playButton').setAttribute('aria-label', 'Pause Entrance');
+        $('timelineState').textContent = 'Entrance';
         readyControls(false); updateProgress(video.currentTime); renderPlaybackMode();
         await playSafely(task.id);
         if (task.id !== operation) return;
       } else {
         phase = 'paused'; icon($('playButton'), 'play');
-        $('playButton').setAttribute('aria-label', '继续播放入场');
-        $('timelineState').textContent = '暂停'; setStatus('TAKE YOUR TIME.', line(current, 'pause'));
+        $('playButton').setAttribute('aria-label', 'Resume Entrance');
+        $('timelineState').textContent = 'Paused'; setStatus('TAKE YOUR TIME.', line(current, 'pause'));
         readyControls(false); updateProgress(video.currentTime); renderPlaybackMode();
       }
       respond(current, 'cancel', 'TAKE YOUR TIME.', false);
@@ -999,7 +999,7 @@
         startOperation(); phase = 'playing'; advanceLoop(paused);
       } else primeLoop();
       respond(i, exists ? 'unfavorite' : 'favorite', 'A LITTLE PREFERENCE.');
-      if (emptied) toast(wasGlobal ? '已没有收藏，已回到定格模式。' : '本组已没有偏爱，已回到定格模式。', '播放方式');
+      if (emptied) toast(wasGlobal ? 'No favorites left. Switched back to Freeze Frame mode.' : 'No favorites left in this wardrobe. Switched back to Freeze Frame mode.', 'Playback Mode');
   }
   $('looks').addEventListener('click', event => {
     const select = event.target.closest('[data-select]');
@@ -1102,7 +1102,7 @@
   });
   function setSound(enabled) {
     prefs.sound = enabled; applyPrefs(); persist(); unlockAudio(); chime(660, .17);
-    toast(prefs.sound ? (prefs.volume ? '声音已开启。' : '声音已开启，当前音量为 0。') : '声音已关闭。', '声音设置');
+    toast(prefs.sound ? (prefs.volume ? 'Sound is on.' : 'Sound is on, but the volume is currently 0.') : 'Sound is off.', 'Sound Settings');
   }
   $('soundButton').addEventListener('click', () => setSound(!prefs.sound));
   $('soundToggle').addEventListener('change', event => setSound(event.target.checked));
@@ -1177,7 +1177,7 @@
   function showRememberedStill() {
     adoptWardrobe(current);
     $('still').src = `images/look-${LOOKS[current].id}.jpg`;
-    $('still').alt = LOOKS[current].name + '穿搭推荐定格';
+    $('still').alt = LOOKS[current].name + ' Recommended Outfit Freeze Frame';
     document.querySelector('.ambient').style.backgroundImage = `url("images/look-${LOOKS[current].id}.jpg")`;
     renderCards(); updateProgress(freezeTime()); applyPrefs();
     setStatus('MOMENT, KEPT.', companionMode() ? LOOKS[current].name : line(current, 'held'));
