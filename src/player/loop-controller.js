@@ -91,8 +91,8 @@
     return order.find(i => loopOrder().indexOf(i) > position) ?? order[0];
   }
   function playbackModeLabel(includeOrder = true) {
-    const labels = {freeze: '定格模式', companion: '动态陪伴', single: '单套循环', all: '本组轮播', favorites: '本组收藏', 'global-all': '全部轮播', 'global-favorites': '全部收藏'};
-    return labels[prefs.playbackMode] + (includeOrder && carouselMode() ? prefs.playbackOrder === 'shuffle' ? ' · 随机' : ' · 顺序' : '');
+    const labels = {freeze: 'Still mode', companion: 'Dynamic companion', single: 'Single-look loop', all: 'Wardrobe carousel', favorites: 'Wardrobe favorites', 'global-all': 'All-wardrobe carousel', 'global-favorites': 'All-wardrobe favorites'};
+    return labels[prefs.playbackMode] + (includeOrder && carouselMode() ? prefs.playbackOrder === 'shuffle' ? ' · Shuffle' : ' · In order' : '');
   }
   function setPlaybackOrder(order) {
     if (!['sequence', 'shuffle'].includes(order) || order === prefs.playbackOrder || phase === 'editing') return;
@@ -104,27 +104,27 @@
   }
   function renderPlaybackMode() {
     const label = playbackModeLabel(), shuffled = prefs.playbackOrder === 'shuffle';
-    const orderText = shuffled ? '随机' : '依次';
+    const orderText = shuffled ? 'Shuffle' : 'In order';
     body.dataset.playbackMode = prefs.playbackMode;
-    $('modeButton').setAttribute('aria-label', '播放方式：' + label);
-    $('modeButton').title = label + ' · 切换播放方式';
+    $('modeButton').setAttribute('aria-label', 'Playback mode: ' + label);
+    $('modeButton').title = label + ' · Change playback mode';
     $('modeLabel').textContent = label;
     $('modeButton').disabled = phase === 'editing';
     document.querySelectorAll('[data-playback-order]').forEach(button => {
       button.setAttribute('aria-checked', String(button.dataset.playbackOrder === prefs.playbackOrder));
       button.disabled = phase === 'editing';
     });
-    document.querySelectorAll('.mode-order-suffix').forEach(suffix => { suffix.textContent = shuffled ? ' · 随机' : ' · 顺序'; });
-    $('playbackOrderHint').textContent = !carouselMode() ? '用于下方的轮播与收藏播放'
-      : shuffled ? '一轮不重复，从下一套开始' : '按衣橱排列，从下一套开始';
+    document.querySelectorAll('.mode-order-suffix').forEach(suffix => { suffix.textContent = shuffled ? ' · Shuffle' : ' · In order'; });
+    $('playbackOrderHint').textContent = !carouselMode() ? 'Used for the carousel and favorites playback below'
+      : shuffled ? 'No repeats within a round; starts with the next look' : 'Follows wardrobe order; starts with the next look';
     const localCount = orderFor(wardrobeFor(current)).filter(i => prefs.favorites.includes(i)).length;
     $('favoriteCount').textContent = localCount;
-    $('favoriteModeHint').textContent = localCount ? `${wardrobeFor(current).name} · ${orderText}播放收藏` : '先点亮正在播放衣橱的穿搭';
+    $('favoriteModeHint').textContent = localCount ? `${wardrobeFor(current).name} · ${orderText} play favorites` : 'Favorite a look in the currently playing wardrobe first';
     $('globalFavoriteCount').textContent = prefs.favorites.length;
-    $('globalFavoriteModeHint').textContent = prefs.favorites.length ? `跨越三个衣橱，${orderText}播放收藏` : '先点亮任意衣橱中喜欢的穿搭';
-    $('globalAllModeHint').textContent = `跨越三个衣橱，${orderText}播放开放穿搭`;
-    $('companionModeHint').textContent = companionClip() ? '入场后，持续循环待机动作' : '这套暂未提供循环片段';
-    $('allModeHint').textContent = `${wardrobeFor(current).name} · ${orderText}完整播放`;
+    $('globalFavoriteModeHint').textContent = prefs.favorites.length ? `Across all three wardrobes, ${orderText} play favorites` : 'Favorite a look you like in any wardrobe first';
+    $('globalAllModeHint').textContent = `Across all three wardrobes, ${orderText} play available looks`;
+    $('companionModeHint').textContent = companionClip() ? 'After the entrance, continuously loop the idle animation' : 'A loop clip is not available for this look yet';
+    $('allModeHint').textContent = `${wardrobeFor(current).name} · ${orderText}play in full`;
     document.querySelectorAll('[data-playback]').forEach(option => {
       option.setAttribute('aria-checked', String(option.dataset.playback === prefs.playbackMode));
       option.setAttribute('aria-disabled', String((option.dataset.playback === 'companion' && !companionClip()) || (option.dataset.playback === 'favorites' && !localCount) || (option.dataset.playback === 'global-favorites' && !prefs.favorites.length)));
@@ -139,22 +139,22 @@
     // Automatic held frames and host suspension must not brighten the wardrobe.
     const userPaused = phase === 'paused' || (phase === 'transition' && Boolean(transition?.userPaused));
     if (body.classList.contains('is-user-paused') !== userPaused) body.classList.toggle('is-user-paused', userPaused);
-    let action = '再看一次入场', symbol = 'repeat', state = '定格';
+    let action = 'Replay entrance', symbol = 'repeat', state = 'Still';
     if (phase === 'error') {
-      action = '重试播放'; state = '播放失败';
+      action = 'Retry playback'; state = 'Playback failed';
     } else if (phase === 'loading') {
-      action = '正在准备播放'; state = '准备';
+      action = 'Preparing playback'; state = 'Ready';
     } else if (phase === 'editing') {
-      action = '正在挑选定格'; state = '选帧';
+      action = 'Selecting a still frame'; state = 'Frame selection';
     } else if (phase === 'transition') {
       const paused = transition?.userPaused;
-      action = transition?.automatic ? paused ? '继续换装' : '暂停换装' : paused ? '继续循环播放' : '暂停循环播放'; symbol = paused ? 'play' : 'pause';
-      state = paused ? '暂停' : transition?.automatic ? '轻轻换一套' : nextLoopIndex() === current ? '再看一遍' : '轻轻换一套';
+      action = transition?.automatic ? paused ? 'Resume outfit change' : 'Pause outfit change' : paused ? 'Resume looping playback' : 'Pause looping playback'; symbol = paused ? 'play' : 'pause';
+      state = paused ? 'Paused' : transition?.automatic ? 'Gently switch to another look' : nextLoopIndex() === current ? 'Watch again' : 'Gently switch to another look';
     } else if (phase === 'playing' || phase === 'paused') {
       const paused = phase === 'paused';
-      action = cycling() ? paused ? '继续循环播放' : '暂停循环播放' : paused ? '继续播放入场' : '暂停入场';
+      action = cycling() ? paused ? 'Resume looping playback' : 'Pause looping playback' : paused ? 'Resume entrance playback' : 'Pause entrance';
       symbol = paused ? 'play' : 'pause';
-      state = paused ? '暂停' : cycling() ? playbackModeLabel(false) : '入场';
+      state = paused ? 'Paused' : cycling() ? playbackModeLabel(false) : 'Entrance';
     }
     icon($('playButton'), symbol);
     $('playButton').setAttribute('aria-label', action); $('playButton').title = action;
@@ -211,9 +211,9 @@
       else primeLoop();
     }
     if (speak && !LOOKS[current].silent) {
-      const words = {freeze: '好，就把喜欢的这一刻留下。', companion: '就在这儿，慢慢陪着你。', single: '这么喜欢这一套呀……那就再陪你看一会儿。', all: '那就慢慢看，我一套一套换给你。', favorites: '你点过心的，我都记得。慢慢穿给你看。', 'global-all': '已开启全部轮播，依次播放三个衣橱的开放穿搭。', 'global-favorites': '已开启全部收藏，依次播放三个衣橱的收藏。'};
-      const wordsForMode = shuffleCarousel() ? `已开启${playbackModeLabel()}，一轮内不重复播放。` : fixedLine(mode, words[mode]);
-      toast(wordsForMode, globalMode() || shuffleCarousel() ? '播放方式' : '她说');
+      const words = {freeze: 'All right, let’s keep this moment you love.', companion: 'I’m right here, keeping you company at your own pace.', single: 'You like this look so much… then I’ll stay and let you enjoy it a little longer.', all: 'Take your time watching; I’ll change looks one by one for you.', favorites: 'I remember every look you hearted. I’ll slowly show them to you.', 'global-all': 'All-wardrobe carousel enabled. Available looks from all three wardrobes will play in order.', 'global-favorites': 'All-wardrobe favorites enabled. Favorites from all three wardrobes will play in order.'};
+      const wordsForMode = shuffleCarousel() ? `Enabled ${playbackModeLabel()}，; no repeats within a round.` : fixedLine(mode, words[mode]);
+      toast(wordsForMode, globalMode() || shuffleCarousel() ? 'Playback mode' : 'She says');
       if (mode !== 'freeze') setStatus('STAY A LITTLE.', wordsForMode);
       unlockAudio(); chime(660, .12);
     }
@@ -363,7 +363,7 @@
       $('curtain').style.backgroundImage = `url("images/${wardrobeFor(current).empty}")`;
       video.muted = !prefs.sound; video.volume = prefs.volume / 100;
       $('still').src = `images/look-${LOOKS[next].id}.jpg`;
-      $('still').alt = LOOKS[next].name + '穿搭推荐定格';
+      $('still').alt = LOOKS[next].name + ' outfit recommendation still frame';
       document.querySelector('.ambient').style.backgroundImage = `url("images/look-${LOOKS[next].id}.jpg")`;
       // Playback updates the selection, never the page a person is browsing.
       updateCards();
