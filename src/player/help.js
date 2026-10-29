@@ -1,4 +1,4 @@
-  let settingsScrollBeforeHelp = 0;
+let settingsScrollBeforeHelp = 0;
   function setHelpView(open) {
     const wasOpen = !$('helpBody').hidden;
     if (open && !wasOpen) settingsScrollBeforeHelp = $('settingsBody').scrollTop;
@@ -9,8 +9,8 @@
     $('backToSettings').hidden = !open;
     $('openHelp').setAttribute('aria-expanded', String(open));
     $('settingsPanel').classList.toggle('is-help-view', open);
-    $('settingsPanel').setAttribute('aria-label', open ? '使用方法' : '氛围设置');
-    $('closeSettings').setAttribute('aria-label', open ? '关闭使用方法' : '关闭设置');
+    $('settingsPanel').setAttribute('aria-label', open ? 'How to use' : 'Atmosphere settings');
+    $('closeSettings').setAttribute('aria-label', open ? 'Close help' : 'Close settings');
     if (!open && wasOpen) $('settingsBody').scrollTop = settingsScrollBeforeHelp;
   }
   function openHelp() {
