@@ -1,46 +1,46 @@
-# 配置与维护边界
+# Configuration and Maintenance Boundaries
 
-`content → 校验与编译 → preview/<host> → 白名单打包 → dist`。
+`content → Validation & Compilation → preview/<host> → Whitelist-based Packaging → dist`
 
-| 位置 | 责任 |
+| Location | Responsibility |
 | --- | --- |
-| `content/project.json` | 作品 ID、标题、作者、品牌、角色称呼、默认穿搭与画质、音量、对白间隔 |
-| `content/wardrobes.json` | 1–3 个衣橱的名字、默认款、相对背景路径和显示顺序；每四套自动分页 |
-| `content/looks/<id>/look.json` | 视频类型、时间参数、文件名、所属衣橱、稳定宿主编号 |
-| 同目录 `dialogue.json` | 这套的成对入场接话、回到播放、随机、持续／亲昵对白 |
-| `content/shared-dialogue.json` | 三个衣橱共用的操作回应；不含其他穿搭正文 |
-| `content/sample-manifest.json` | 原始示例内容的文件与文字指纹；用于提醒替换，不随个人作品修改 |
-| `src/player` | 原有双视频播放、离场、循环、选句、界面与暂停逻辑 |
-| `src/hosts` | WE 属性通知、Lively 暂停通知和 WE 属性模板 |
-| `src/index.html`、CSS | 页面结构与既有外观；`{{...}}` 由构建替换 |
-| `tools/model.py` | 配置约束、路径边界、对白配对和运行数据生成 |
-| `tools/build.py` | 编译代码与配置，只复制明确引用的素材 |
-| `tools/media.py`、`project.py` | 素材加工、备份、命令入口与打包 |
+| `content/project.json` | Project ID, title, author, brand, character designation, default outfit and image quality, volume, and dialogue spacing |
+| `content/wardrobes.json` | Names of 1–3 wardrobes, default styles, relative background paths, and display order; automatic pagination every four outfits |
+| `content/looks/<id>/look.json` | Video type, timing parameters, file names, associated wardrobe, and assigned host index |
+| `dialogue.json` (in the same directory) | Paired entry/follow-up dialogue, return-to-playback dialogue, random dialogue, and continuous/intimate dialogue for this specific set |
+| `content/shared-dialogue.json` | Interaction responses shared across all three wardrobes; excludes outfit-specific dialogue content |
+| `content/sample-manifest.json` | File and text fingerprints for the original sample content; serves as a reminder for replacement—not modified for individual projects |
+| `src/player` | Logic for dual-video playback, exit sequences, looping, dialogue selection, UI, and pause handling |
+| `src/hosts` | WE (Wallpaper Engine) property notifications, Lively pause notifications, and WE property templates |
+| `src/index.html` & CSS | Page structure and existing visual appearance; `{{...}}` placeholders are replaced during the build process |
+| `tools/model.py` | Configuration constraints, path boundaries, dialogue pairing, and generation of runtime data |
+| `tools/build.py` | Compiles code and configuration; copies only the assets explicitly referenced |
+| `tools/media.py`, `project.py` | Asset processing, backups, command-line entry points, and packaging |
 
-## 身份与排序
+## Identity and Ordering
 
-`look.id` 必须等于文件夹名，使用小写字母、数字、连字符，以字母开头。改名称时不改 ID；确实换成另一套全新内容时新增 ID。`hostValue` 是 WE 的持久编号；新增工具自动分配，移除后不会复用。
+The `look.id` must match its corresponding folder name; it must consist of lowercase letters, numbers, and hyphens, and must begin with a letter. Do not change the ID when renaming an item; assign a new ID only when the content is entirely replaced. `hostValue` serves as a persistent identifier for the WE (Wallpaper Engine) environment; it is automatically assigned by the ingestion tool and is never reused once an item is removed.
 
-运行时可以用数组索引处理视频，但保存文件携带完整 `catalogIds`。载入时按 ID 重映射当前穿搭、收藏、自选定格和衣橱记忆，因此增删、排序不会串套。对白按穿搭 ID 与句子 ID 维护抽取历史。
+While array indices may be used to handle videos during runtime, the saved files contain complete `catalogIds`. Upon loading, the system remaps current outfits, favorites, custom freeze-frames, and wardrobe memories based on these IDs, ensuring that additions, deletions, or reordering do not cause data misalignment. Dialogue history is tracked using a combination of outfit IDs and sentence IDs.
 
-作品存储键由 `project.id + 宿主` 生成，包括布局、字号和对白历史。新作品用新 ID；同一作品更新保持 ID。不继承原作者作品的存储键或工坊编号。
+Storage keys for projects are generated using `project.id + host`, encompassing layout, font size, and dialogue history. New projects receive new IDs, while updates to an existing project retain the original ID. Storage keys or Workshop IDs from the original author’s project are not inherited.
 
-`project.author` 用于宿主的作品作者信息；模板界面不叠加作者或 B 站水印。代码版权声明保留在许可文件中。
+`project.author` is used to store the author information within the host environment; the template interface does not overlay author names or Bilibili watermarks. Copyright notices for the code remain in the license file.
 
-## look.json 参数
+## `look.json` Parameters
 
-- `kind`：`entry` 入场定格；`departure` 入场定格并有可继续播放的离场尾段；`companion` 入场后循环。
-- `freeze`、`duration`、`loopStart`、`loopEnd` 均为秒。`loopEnd` 不含下一帧，通常取片尾；动态定格点与循环起点一致。
-- `fps`、`width`、`height` 来自处理后视频，勿填写原 MP4 的信息。接入工具统一输出 60 FPS VP9 WebM；基本构建不会再次转码。
-- `transition` 只用于离场：`lead` 提前准备时间、`fade` 淡入时间，默认 0.5 / 0.4 秒。
-- `video`、`cover`、`still`、`dialogue` 都是本穿搭目录内相对路径，不能使用绝对路径或 `..`。
-- `qualities` 可选：例如 `{"1440p":"1440p.webm"}`。基础视频始终存在；UI 按实际基础分辨率显示，未提供的档位不能点击。
-- `sample` 是来源提醒，初始样片为 true。接入自有视频会设为 false，但这不自动改变旧对白的使用范围。
+- `kind`: Defines the behavior—`entry` (static freeze-frame upon entry), `departure` (freeze-frame upon entry, followed by an exit sequence that allows for continued playback), or `companion` (loops after entry).
+- `freeze`, `duration`, `loopStart`, and `loopEnd` are all measured in seconds. `loopEnd` excludes the subsequent frame and typically marks the end of the clip; the dynamic freeze-frame point aligns with the start of the loop.
+- `fps`, `width`, and `height` must reflect the processed video, not the original MP4 file. The ingestion tool outputs 60 FPS VP9 WebM files; the core build process does not perform further transcoding.
+- `transition` applies only to the exit sequence: `lead` (pre-exit preparation time) and `fade` (fade-in duration); defaults are 0.5s and 0.4s, respectively.
+- `video`, `cover`, `still`, and `dialogue` must be specified as relative paths within the current outfit directory; absolute paths or `..` (parent directory references) are not permitted.
+- `qualities` is optional—for example: `{"1440p": "1440p.webm"}`. The base video is always present; the UI reflects the actual base resolution, and options for unavailable resolutions are disabled (unclickable).
+- `sample` serves as an indicator of the source; it is set to `true` for the initial sample assets. When integrating your own videos, this should be set to `false`, though doing so does not automatically alter the scope of existing dialogue usage.
 
-`project.defaultQuality` 使用 `original`、`1440p` 或 `1080p`。`original` 代表本套基础文件，不固定表示 4K；四套初始样片基础文件就是 1080P。
+`project.defaultQuality` can be set to `original`, `1440p`, or `1080p`. `original` refers to the specific set of base files provided—it does not inherently imply 4K resolution (for instance, the four sets of initial sample assets are 1080p).
 
-## 播放边界
+## Playback Boundaries
 
-两路视频与取消令牌继续由播放器维护。不要把系统暂停、网页隐藏与用户主动暂停合并。切衣橱仅浏览，点封面才换场景。自动切换依据正在播放的衣橱，不能误用正在浏览的衣橱。
+The two video streams and the cancellation token remain managed by the player. Do not conflate system-level pauses or browser tab hiding with a user-initiated pause. Browsing the wardrobe does not trigger a scene change; a scene change only occurs when a cover image is selected. Automatic transitions must be based on the wardrobe currently being played, not the one currently being browsed.
 
-`build` 不启动应用，不联网，不发布；`pack` 每次重建并按文件清单导出，不把 `.generated.json` 或开发资料塞入壁纸 ZIP。`source` 才导出包含文档、工具及示例内容的源码 ZIP。
+The `build` command does not launch the application, connect to the internet, or perform a release. The `pack` command triggers a fresh build and exports files according to a manifest, ensuring that `.generated.json` files or development assets are not included in the final wallpaper ZIP. The `source` command is used to export a source ZIP containing documentation, tools, and sample content.
