@@ -48,7 +48,7 @@
       // Retain the last visible frame and a usable play button on decode failure.
       phase = 'paused'; video.pause(); stopWatcher(); clearLoadingHint();
       body.classList.remove('is-playing'); readyControls(false);
-      toast('循环衔接暂时中断，点播放继续。', '播放提示');
+      toast('Loop sequence temporarily interrupted; tap Play to resume.', 'Playback Prompt');
     };
     try {
       const target = companionStart();
