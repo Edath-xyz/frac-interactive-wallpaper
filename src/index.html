@@ -38,8 +38,8 @@
 
   <main id="stage" aria-label="{{title}}">
     <div class="ambient" aria-hidden="true"></div>
-    <img id="still" class="scene" src="{{defaultStill}}" alt="{{defaultName}}穿搭推荐定格">
-    <video id="film" class="scene" playsinline preload="none" muted aria-label="当前穿搭入场视频"></video>
+    <img id="still" class="scene" src="{{defaultStill}}" alt="{{defaultName}}outfit recommendation still">
+    <video id="film" class="scene" playsinline preload="none" muted aria-label="Current outfit entrance video"></video>
     <video id="filmNext" class="scene" playsinline preload="none" muted aria-hidden="true"></video>
     <div id="curtain" class="scene" aria-hidden="true"></div>
     <div class="scene-shade" aria-hidden="true"></div>
@@ -47,232 +47,232 @@
   </main>
 
   <header class="topbar interface">
-    <a class="brand" href="#" id="brand" aria-label="回到衣橱"><span class="brand-type">{{brand}}<span>{{tagline}}</span></span></a>
-    <div class="top-right"><div class="clock"><span id="clock">00:00</span><span class="clock-caption">只属于你的时间</span></div><span class="top-divider"></span><button id="settingsButton" class="icon-button" title="氛围设置" aria-label="氛围设置" aria-expanded="false"><svg><use href="#i-sliders"/></svg></button></div>
+    <a class="brand" href="#" id="brand" aria-label="Return to wardrobe"><span class="brand-type">{{brand}}<span>{{tagline}}</span></span></a>
+    <div class="top-right"><div class="clock"><span id="clock">00:00</span><span class="clock-caption">Time that belongs only to you</span></div><span class="top-divider"></span><button id="settingsButton" class="icon-button" title="Atmosphere settings" aria-label="Atmosphere settings" aria-expanded="false"><svg><use href="#i-sliders"/></svg></button></div>
   </header>
 
-  <section class="wardrobe interface" aria-label="穿搭选择">
+  <section class="wardrobe interface" aria-label="Choose an outfit">
     <div class="wardrobe-content">
     <div class="eyebrow"><span class="hairline"></span> THE ART OF YOUR PREFERENCE</div>
-    <h1>今晚，<br>偏爱哪一面<span class="title-dot">？</span></h1>
-    <p class="intro">选一套喜欢的。余下的时间，留给我们。</p>
+    <h1>Tonight, <br>Which side do you prefer<span class="title-dot">？</span></h1>
+    <p class="intro">Choose an outfit you like. Leave the rest of the time to us.</p>
     {{wardrobeTabs}}
-    <div class="collection-heading"><span>{{wardrobeTitle}}</span><div class="wardrobe-heading-actions"><button id="showCurrent" class="browse-return" type="button" hidden>回到播放页</button><button id="wardrobeOrder" class="wardrobe-order" type="button" aria-pressed="false" aria-label="衣橱排列：正序，点击切换为倒序"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="order-lines" d="M3 5h8M3 10h6M3 15h4"/><path class="order-arrow" d="M15 4v12m-3-3 3 3 3-3"/></svg><span id="wardrobeOrderLabel">正序</span></button></div></div>
-    <div class="looks" id="looks" aria-label="当前衣橱页"></div>
-    <nav class="wardrobe-pages" aria-label="衣橱翻页"><button id="prevPage" class="page-arrow" aria-label="上一页衣橱"><svg><use href="#i-chevron"/></svg></button><span id="chapterName" class="chapter-name">日常靠近</span><div id="pageTabs" class="page-tabs"></div><button id="nextPage" class="page-arrow" aria-label="下一页衣橱"><svg><use href="#i-chevron"/></svg></button></nav>
-    <div class="selection-meta"><span class="selection-current"><small id="selectionState">当前定格</small><span id="lookName">{{defaultName}}</span></span><span id="lookEnglish">TIED WITH CARE</span></div>
-    <button id="randomButton" class="random-button"><svg><use href="#i-shuffle"/></svg><span id="randomText">交给心动</span><span id="randomHint" class="random-hint">随机一套</span><svg class="arrow"><use href="#i-arrow"/></svg></button>
-    <div id="randomOptions" class="random-options" role="group" aria-label="随机范围">
-      <span>随机范围</span><div>
-        <button type="button" data-random-scope="all" aria-pressed="true">本组全部</button>
-        <button type="button" data-random-scope="favorites" aria-pressed="false" disabled>本组偏爱 <span id="randomFavoriteCount">0</span></button>
+    <div class="collection-heading"><span>{{wardrobeTitle}}</span><div class="wardrobe-heading-actions"><button id="showCurrent" class="browse-return" type="button" hidden>Return to playback</button><button id="wardrobeOrder" class="wardrobe-order" type="button" aria-pressed="false" aria-label="Wardrobe order: ascending; click to switch to descending"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="order-lines" d="M3 5h8M3 10h6M3 15h4"/><path class="order-arrow" d="M15 4v12m-3-3 3 3 3-3"/></svg><span id="wardrobeOrderLabel">Ascending</span></button></div></div>
+    <div class="looks" id="looks" aria-label="Current wardrobe page"></div>
+    <nav class="wardrobe-pages" aria-label="Wardrobe pagination"><button id="prevPage" class="page-arrow" aria-label="Previous wardrobe page"><svg><use href="#i-chevron"/></svg></button><span id="chapterName" class="chapter-name">Everyday closeness</span><div id="pageTabs" class="page-tabs"></div><button id="nextPage" class="page-arrow" aria-label="Next wardrobe page"><svg><use href="#i-chevron"/></svg></button></nav>
+    <div class="selection-meta"><span class="selection-current"><small id="selectionState">Current still</small><span id="lookName">{{defaultName}}</span></span><span id="lookEnglish">TIED WITH CARE</span></div>
+    <button id="randomButton" class="random-button"><svg><use href="#i-shuffle"/></svg><span id="randomText">Leave it to your heart</span><span id="randomHint" class="random-hint">Choose a random outfit</span><svg class="arrow"><use href="#i-arrow"/></svg></button>
+    <div id="randomOptions" class="random-options" role="group" aria-label="Random selection range">
+      <span>Random selection range</span><div>
+        <button type="button" data-random-scope="all" aria-pressed="true">All in this collection</button>
+        <button type="button" data-random-scope="favorites" aria-pressed="false" disabled>Favorites in this collection <span id="randomFavoriteCount">0</span></button>
       </div>
     </div>
-    <div class="collection-note"><span class="tiny-spark">✧</span><span id="randomScope">九套穿搭，慢慢挑。不连续重复。</span></div>
+    <div class="collection-note"><span class="tiny-spark">✧</span><span id="randomScope">Nine outfits to explore at your own pace. No immediate repeats.</span></div>
     </div>
   </section>
 
   <aside class="look-caption interface"><span class="vertical-label">{{collectionLabel}}</span><span class="caption-line"></span><span id="lookNumber">03</span></aside>
 
   <footer class="bottom-bar interface">
-    <div class="now-playing"><span class="status-dot"></span><div><span class="micro" id="statusLabel">MOMENT, KEPT.</span><p id="statusText" role="status" aria-live="polite">这一刻，为你停留。</p></div></div>
+    <div class="now-playing"><span class="status-dot"></span><div><span class="micro" id="statusLabel">MOMENT, KEPT.</span><p id="statusText" role="status" aria-live="polite">This moment stays for you.</p></div></div>
     <div class="playback">
-      <button id="playButton" class="icon-button primary-control" aria-label="再看一次入场" title="再看一次入场"><svg><use href="#i-repeat"/></svg><span id="retryLabel" hidden>重试</span></button>
-      <aside id="firstUseHint" class="first-use-hint" aria-label="首次使用提示" hidden>
-        <div><strong>从这里开始</strong><button id="closeFirstUse" type="button" aria-label="关闭首次使用提示">知道了</button></div>
-        <p>当前为定格模式，点选穿搭可播放入场。</p>
-        <p>在下方切换循环。</p>
-        <button id="firstUseHelp" class="first-use-help" type="button" aria-controls="settingsPanel">查看使用方法 <span aria-hidden="true">→</span></button>
+      <button id="playButton" class="icon-button primary-control" aria-label="Replay entrance" title="Replay entrance"><svg><use href="#i-repeat"/></svg><span id="retryLabel" hidden>Retry</span></button>
+      <aside id="firstUseHint" class="first-use-hint" aria-label="First-use tip" hidden>
+        <div><strong>Start here</strong><button id="closeFirstUse" type="button" aria-label="OffFirst-use tip">Got it</button></div>
+        <p>Still mode is active. Select an outfit to play its entrance.</p>
+        <p>Switch looping modes below.</p>
+        <button id="firstUseHelp" class="first-use-help" type="button" aria-controls="settingsPanel">View instructions <span aria-hidden="true">→</span></button>
       </aside>
       <div class="playback-mode">
-        <button id="modeButton" class="icon-button mode-button" type="button" aria-label="播放方式：定格模式" title="播放方式" aria-haspopup="menu" aria-expanded="false" aria-controls="modeMenu"><span id="modeLabel">定格模式</span><svg><use href="#i-chevron"/></svg></button>
-        <div id="modeMenu" class="mode-menu" role="menu" aria-label="播放方式" hidden>
-          <div class="mode-heading"><span>陪伴的节奏</span><span class="micro">STAY A LITTLE</span></div>
-          <div class="mode-order" role="group" aria-label="轮播顺序">
-            <div class="mode-order-row"><span>轮播顺序</span><div class="mode-order-options">
-              <button type="button" role="menuitemradio" data-playback-order="sequence" aria-checked="true">顺序</button>
-              <button type="button" role="menuitemradio" data-playback-order="shuffle" aria-checked="false">随机</button>
+        <button id="modeButton" class="icon-button mode-button" type="button" aria-label="Playback mode: Still mode" title="Playback mode" aria-haspopup="menu" aria-expanded="false" aria-controls="modeMenu"><span id="modeLabel">Still mode</span><svg><use href="#i-chevron"/></svg></button>
+        <div id="modeMenu" class="mode-menu" role="menu" aria-label="Playback mode" hidden>
+          <div class="mode-heading"><span>The rhythm of companionship</span><span class="micro">STAY A LITTLE</span></div>
+          <div class="mode-order" role="group" aria-label="Carousel order">
+            <div class="mode-order-row"><span>Carousel order</span><div class="mode-order-options">
+              <button type="button" role="menuitemradio" data-playback-order="sequence" aria-checked="true">In order</button>
+              <button type="button" role="menuitemradio" data-playback-order="shuffle" aria-checked="false">Random</button>
             </div></div>
-            <p id="playbackOrderHint">用于下方的轮播与收藏播放</p>
+            <p id="playbackOrderHint">Used for the collection and favorites playback modes below</p>
           </div>
-          <button type="button" role="menuitemradio" data-playback="freeze" aria-checked="true"><svg class="mode-symbol"><use href="#i-frame"/></svg><span><strong>定格模式</strong><small>把喜欢的那一秒，留在这里</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
-          <button type="button" role="menuitemradio" data-playback="companion" aria-checked="false" aria-disabled="true"><svg class="mode-symbol"><use href="#i-repeat"/></svg><span><strong>动态陪伴</strong><small id="companionModeHint">这套暂未提供循环片段</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
-          <button type="button" role="menuitemradio" data-playback="single" aria-checked="false"><svg class="mode-symbol"><use href="#i-repeat"/></svg><span><strong>单套循环</strong><small>这一套，想再多看几遍</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
-          <button type="button" role="menuitemradio" data-playback="all" aria-checked="false"><svg class="mode-symbol"><use href="#i-arrow"/></svg><span><strong>本组轮播<span class="mode-order-suffix"> · 顺序</span></strong><small id="allModeHint">当前衣橱内，依次完整播放</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
-          <button type="button" role="menuitemradio" data-playback="favorites" aria-checked="false" aria-disabled="true"><svg class="mode-symbol"><use href="#i-heart"/></svg><span><strong>本组收藏<span class="mode-order-suffix"> · 顺序</span> <em id="favoriteCount">0</em></strong><small id="favoriteModeHint">先点亮本组喜欢的穿搭</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
+          <button type="button" role="menuitemradio" data-playback="freeze" aria-checked="true"><svg class="mode-symbol"><use href="#i-frame"/></svg><span><strong>Still mode</strong><small>Keep your favorite second right here</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
+          <button type="button" role="menuitemradio" data-playback="companion" aria-checked="false" aria-disabled="true"><svg class="mode-symbol"><use href="#i-repeat"/></svg><span><strong>Animated companion</strong><small id="companionModeHint">No looping clip is available for this outfit yet</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
+          <button type="button" role="menuitemradio" data-playback="single" aria-checked="false"><svg class="mode-symbol"><use href="#i-repeat"/></svg><span><strong>Loop this outfit</strong><small>Watch this outfit a few more times</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
+          <button type="button" role="menuitemradio" data-playback="all" aria-checked="false"><svg class="mode-symbol"><use href="#i-arrow"/></svg><span><strong>Play this collection<span class="mode-order-suffix"> · In order</span></strong><small id="allModeHint">Play all available outfits in the current wardrobe in order</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
+          <button type="button" role="menuitemradio" data-playback="favorites" aria-checked="false" aria-disabled="true"><svg class="mode-symbol"><use href="#i-heart"/></svg><span><strong>Collection favorites<span class="mode-order-suffix"> · In order</span> <em id="favoriteCount">0</em></strong><small id="favoriteModeHint">Favorite outfits in this collection first</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
           <div class="mode-divider" role="separator"></div>
-          <button type="button" role="menuitemradio" data-playback="global-all" aria-checked="false"><svg class="mode-symbol"><use href="#i-arrow"/></svg><span><strong>全部轮播<span class="mode-order-suffix"> · 顺序</span></strong><small id="globalAllModeHint">跨越全部衣橱，依次播放开放穿搭</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
-          <button type="button" role="menuitemradio" data-playback="global-favorites" aria-checked="false" aria-disabled="true"><svg class="mode-symbol"><use href="#i-heart"/></svg><span><strong>全部收藏<span class="mode-order-suffix"> · 顺序</span> <em id="globalFavoriteCount">0</em></strong><small id="globalFavoriteModeHint">先点亮任意衣橱中喜欢的穿搭</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
-          <p class="mode-footnote">你来决定，我慢慢陪你。</p>
+          <button type="button" role="menuitemradio" data-playback="global-all" aria-checked="false"><svg class="mode-symbol"><use href="#i-arrow"/></svg><span><strong>Play all collections<span class="mode-order-suffix"> · In order</span></strong><small id="globalAllModeHint">Play all available outfits across every wardrobe in order</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
+          <button type="button" role="menuitemradio" data-playback="global-favorites" aria-checked="false" aria-disabled="true"><svg class="mode-symbol"><use href="#i-heart"/></svg><span><strong>All favorites<span class="mode-order-suffix"> · In order</span> <em id="globalFavoriteCount">0</em></strong><small id="globalFavoriteModeHint">Favorite outfits in any wardrobe first</small></span><svg class="mode-check"><use href="#i-check"/></svg></button>
+          <p class="mode-footnote">You decide; I’ll keep you company.</p>
         </div>
       </div>
-      <div class="timeline-display"><div class="timeline-label"><span id="timeLabel">10.50</span><span id="timelineState">定格</span></div><div class="timeline-track"><div id="timelineFill"></div></div></div>
-      <button id="momentButton" class="text-button" title="点击时间轴定位，用 −／＋ 逐帧微调"><svg><use href="#i-frame"/></svg><span>挑选定格</span></button>
+      <div class="timeline-display"><div class="timeline-label"><span id="timeLabel">10.50</span><span id="timelineState">Still</span></div><div class="timeline-track"><div id="timelineFill"></div></div></div>
+      <button id="momentButton" class="text-button" title="Click the timeline to position, then fine-tune frame by frame with − / +"><svg><use href="#i-frame"/></svg><span>Choose a still frame</span></button>
     </div>
-    <div class="view-tools"><button id="soundButton" class="icon-button" aria-label="开启声音" title="开启声音" aria-pressed="false"><svg><use href="#i-mute"/></svg></button><button id="immerseButton" class="text-button" title="隐藏界面，进入沉浸模式"><svg><use href="#i-eye"/></svg><span>沉浸</span></button></div>
+    <div class="view-tools"><button id="soundButton" class="icon-button" aria-label="Enable sound" title="Enable sound" aria-pressed="false"><svg><use href="#i-mute"/></svg></button><button id="immerseButton" class="text-button" title="Hide the interface and enter immersive mode"><svg><use href="#i-eye"/></svg><span>Immerse</span></button></div>
   </footer>
-  <button id="wakeButton" class="wake-button" aria-label="显示衣橱"><span class="wake-line"></span><span>打开衣橱</span><svg><use href="#i-chevron"/></svg></button>
+  <button id="wakeButton" class="wake-button" aria-label="Show wardrobe"><span class="wake-line"></span><span>Open wardrobe</span><svg><use href="#i-chevron"/></svg></button>
 
-  <section id="settingsPanel" class="panel settings-panel" hidden aria-label="氛围设置">
+  <section id="settingsPanel" class="panel settings-panel" hidden aria-label="Atmosphere settings">
     <div class="panel-top settings-header">
       <span id="settingsEyebrow" class="micro">MAKE YOURSELF AT HOME</span>
-      <button id="backToSettings" class="help-back" type="button" hidden><svg aria-hidden="true"><use href="#i-chevron"/></svg><span>返回设置</span></button>
+      <button id="backToSettings" class="help-back" type="button" hidden><svg aria-hidden="true"><use href="#i-chevron"/></svg><span>Back to settings</span></button>
       <div class="settings-header-actions">
-        <button id="openHelp" class="help-entry" type="button" aria-controls="helpBody" aria-expanded="false">使用方法</button>
-        <button class="icon-button" id="closeSettings" type="button" aria-label="关闭设置"><svg><use href="#i-close"/></svg></button>
+        <button id="openHelp" class="help-entry" type="button" aria-controls="helpBody" aria-expanded="false">Instructions</button>
+        <button class="icon-button" id="closeSettings" type="button" aria-label="Close settings"><svg><use href="#i-close"/></svg></button>
       </div>
     </div>
     <div id="settingsBody" class="settings-body">
-      <h2>舒服一点。</h2><p class="panel-subtitle">把这里，调成你喜欢的样子。</p>
-    <div class="setting-line" id="textSizeLabel">文字大小</div>
+      <h2>Make yourself comfortable.</h2><p class="panel-subtitle">Make this space look the way you like.</p>
+    <div class="setting-line" id="textSizeLabel">Text size</div>
     <div id="textSizeOptions" class="setting-options" role="group" aria-labelledby="textSizeLabel">
-      <button type="button" data-text-size="standard" aria-pressed="true">标准</button><button type="button" data-text-size="comfortable" aria-pressed="false">舒适</button><button type="button" data-text-size="larger" aria-pressed="false">较大</button><button type="button" data-text-size="large" aria-pressed="false">大字</button>
+      <button type="button" data-text-size="standard" aria-pressed="true">Standard</button><button type="button" data-text-size="comfortable" aria-pressed="false">Comfortable</button><button type="button" data-text-size="larger" aria-pressed="false">Larger</button><button type="button" data-text-size="large" aria-pressed="false">Large text</button>
     </div>
-    <label class="setting-line" for="brightness"><span>画面明暗</span><output id="brightnessValue">100%</output></label><input id="brightness" type="range" min="65" max="115" step="1" value="100">
-    <label class="setting-line toggle-line sound-setting" for="soundToggle"><span>播放声音<small id="soundState" class="settings-sr-only" aria-live="polite">已静音</small></span><input id="soundToggle" type="checkbox" aria-controls="soundVolume" aria-expanded="false"><span class="switch" aria-hidden="true"></span></label>
+    <label class="setting-line" for="brightness"><span>Image brightness</span><output id="brightnessValue">100%</output></label><input id="brightness" type="range" min="65" max="115" step="1" value="100">
+    <label class="setting-line toggle-line sound-setting" for="soundToggle"><span>Play sound<small id="soundState" class="settings-sr-only" aria-live="polite">Muted</small></span><input id="soundToggle" type="checkbox" aria-controls="soundVolume" aria-expanded="false"><span class="switch" aria-hidden="true"></span></label>
         <div id="soundVolume" class="settings-volume" hidden>
-    <label class="setting-line" for="volume"><span>声音大小</span><output id="volumeValue">35%</output></label><input id="volume" type="range" min="0" max="100" step="1" value="35">
+    <label class="setting-line" for="volume"><span>Volume</span><output id="volumeValue">35%</output></label><input id="volume" type="range" min="0" max="100" step="1" value="35">
         </div>
-      <label class="setting-line toggle-line" for="idleToggle"><span>安静时，自动收起界面<small>停留 15 秒，移动鼠标唤回</small></span><input id="idleToggle" type="checkbox" checked><span class="switch" aria-hidden="true"></span></label>
+      <label class="setting-line toggle-line" for="idleToggle"><span>Automatically hide the interface when idle<small>After 15 seconds idle, move the mouse to show it again</small></span><input id="idleToggle" type="checkbox" checked><span class="switch" aria-hidden="true"></span></label>
     <div class="settings-timer">
-      <div class="setting-line" id="autoLabel"><span>偶尔换一套</span><output id="autoIntervalValue">关闭</output></div>
+      <div class="setting-line" id="autoLabel"><span>Change outfits occasionally</span><output id="autoIntervalValue">Off</output></div>
       <div id="autoOptions" class="setting-options" role="group" aria-labelledby="autoLabel" aria-describedby="autoLoopNote">
-        <button type="button" data-interval="0" aria-pressed="true" title="关闭自动换装">关闭</button><button type="button" data-interval="0.25" aria-pressed="false">15 秒</button><button type="button" data-interval="5" aria-pressed="false">5 分钟</button><button type="button" data-interval="15" aria-pressed="false">15 分钟</button><button type="button" id="customIntervalButton" aria-pressed="false" aria-expanded="false" aria-controls="autoCustom">自定义</button>
+        <button type="button" data-interval="0" aria-pressed="true" title="Turn off automatic outfit changes">Off</button><button type="button" data-interval="0.25" aria-pressed="false">15 seconds</button><button type="button" data-interval="5" aria-pressed="false">5 minutes</button><button type="button" data-interval="15" aria-pressed="false">15 minutes</button><button type="button" id="customIntervalButton" aria-pressed="false" aria-expanded="false" aria-controls="autoCustom">Custom</button>
       </div>
-      <p id="autoTimingNote" class="layout-note auto-timing-note">从定格开始计时，停留满所选时长再换装。</p>
+      <p id="autoTimingNote" class="layout-note auto-timing-note">Timing starts from the still frame; the outfit changes after the selected duration.</p>
       <div id="autoCustom" class="auto-custom" hidden>
         <div class="auto-custom-row">
-          <label for="customInterval">每隔</label><input id="customInterval" type="number" inputmode="numeric" min="1" max="3600" step="1" value="30" aria-describedby="autoCustomFeedback">
-          <div id="customIntervalUnits" class="auto-unit-options" role="group" aria-label="时间单位"><button type="button" data-time-unit="seconds" aria-pressed="true">秒</button><button type="button" data-time-unit="minutes" aria-pressed="false">分钟</button></div>
-          <button type="button" id="applyCustomInterval" aria-live="polite">应用</button>
+          <label for="customInterval">Every</label><input id="customInterval" type="number" inputmode="numeric" min="1" max="3600" step="1" value="30" aria-describedby="autoCustomFeedback">
+          <div id="customIntervalUnits" class="auto-unit-options" role="group" aria-label="时间单位"><button type="button" data-time-unit="seconds" aria-pressed="true">seconds</button><button type="button" data-time-unit="minutes" aria-pressed="false">minutes</button></div>
+          <button type="button" id="applyCustomInterval" aria-live="polite">Apply</button>
         </div>
         <p class="layout-note auto-custom-feedback" id="autoCustomFeedback" role="alert" hidden></p>
       </div>
-      <p id="autoLoopNote" class="auto-loop-note" hidden>单套循环和轮播时暂不生效，回到定格或动态陪伴后恢复。</p>
+      <p id="autoLoopNote" class="auto-loop-note" hidden>Unavailable during single-outfit looping and carousels; resumes in Still or Animated Companion mode.</p>
     </div>
-    <div class="setting-line" id="qualityLabel">视频画质</div>
+    <div class="setting-line" id="qualityLabel">Video quality</div>
     <div class="setting-options quality-options" id="qualityOptions" role="group" aria-labelledby="qualityLabel">{{qualityButtons}}</div>
-    <p id="qualityNotice" class="quality-notice" hidden>本套未提供所选档位，正在使用本套基础视频。</p>
+    <p id="qualityNotice" class="quality-notice" hidden>The selected quality is unavailable for this outfit. Using its base video.</p>
     <details id="personalizationOptions" class="layout-setting personalization-setting">
-      <summary class="layout-button"><span>个性化</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+      <summary class="layout-button"><span>Personalization</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
     <div class="layout-setting">
-      <div id="layoutLabel" class="setting-line">调整界面位置</div>
+      <div id="layoutLabel" class="setting-line">Adjust interface position</div>
       <div id="layoutControls" class="layout-controls" role="group" aria-labelledby="layoutLabel">
-        <label class="setting-line" for="layoutRange"><span>左侧界面左右移动</span><output id="layoutValue">默认位置</output></label>
+        <label class="setting-line" for="layoutRange"><span>Move the left-side interface horizontally</span><output id="layoutValue">Default position</output></label>
         <div class="layout-range-row">
-          <button type="button" id="layoutLeft" aria-label="向左移动界面"><svg><use href="#i-chevron"/></svg></button>
+          <button type="button" id="layoutLeft" aria-label="Move interface left"><svg><use href="#i-chevron"/></svg></button>
           <input id="layoutRange" type="range" min="0" max="0" step="1" value="0">
-          <button type="button" id="layoutRight" aria-label="向右移动界面"><svg><use href="#i-chevron"/></svg></button>
+          <button type="button" id="layoutRight" aria-label="Move interface right"><svg><use href="#i-chevron"/></svg></button>
         </div>
-        <p class="layout-note" id="layoutNote">左侧整列一起移动，为桌面图标留出空位。</p>
-        <label class="setting-line" for="playbackPositionRange"><span>播放控件上下移动</span><output id="playbackPositionValue">默认位置</output></label>
+        <p class="layout-note" id="layoutNote">Move the entire left column together to make room for desktop icons.</p>
+        <label class="setting-line" for="playbackPositionRange"><span>Move playback controls vertically</span><output id="playbackPositionValue">Default position</output></label>
         <div class="layout-range-row">
-          <button type="button" id="playbackPositionUp" aria-label="向上移动播放控件"><svg><use href="#i-chevron"/></svg></button>
+          <button type="button" id="playbackPositionUp" aria-label="Move playback controls up"><svg><use href="#i-chevron"/></svg></button>
           <input id="playbackPositionRange" type="range" min="0" max="0" step="1" value="0">
-          <button type="button" id="playbackPositionDown" aria-label="向下移动播放控件"><svg><use href="#i-chevron"/></svg></button>
+          <button type="button" id="playbackPositionDown" aria-label="Move playback controls down"><svg><use href="#i-chevron"/></svg></button>
         </div>
-        <p class="layout-note">从播放按钮到「挑选定格」整组移动，避开桌面中央的图标。</p>
-        <div class="layout-actions"><button type="button" id="layoutReset">恢复默认</button><span></span><button type="button" id="layoutCancel" disabled>取消</button><button type="button" id="layoutDone" disabled>完成</button></div>
+        <p class="layout-note">Move the whole group from the Play button to “Choose a still frame” to avoid desktop icons in the center.</p>
+        <div class="layout-actions"><button type="button" id="layoutReset">Restore defaults</button><span></span><button type="button" id="layoutCancel" disabled>Cancel</button><button type="button" id="layoutDone" disabled>Done</button></div>
       </div>
     </div>
-    <div class="setting-line" id="fitLabel">画面比例</div>
+    <div class="setting-line" id="fitLabel">Aspect ratio</div>
     <div id="fitOptions" class="setting-options" role="group" aria-labelledby="fitLabel">
-      <button type="button" data-fit="contain" aria-pressed="true">完整画面</button><button type="button" data-fit="cover" aria-pressed="false">铺满屏幕</button>
+      <button type="button" data-fit="contain" aria-pressed="true">Fit entire image</button><button type="button" data-fit="cover" aria-pressed="false">Fill screen</button>
     </div>
-      <label class="setting-line toggle-line" for="edgeLightToggle"><span>装饰亮条<small>左上角的细线装饰</small></span><input id="edgeLightToggle" type="checkbox"><span class="switch" aria-hidden="true"></span></label>
+      <label class="setting-line toggle-line" for="edgeLightToggle"><span>Decorative light strip<small>Thin decorative line in the upper-left corner</small></span><input id="edgeLightToggle" type="checkbox"><span class="switch" aria-hidden="true"></span></label>
     </details>
     <div class="reset-setting">
       <button type="button" id="resetSettingsButton" class="layout-button reset-button" aria-expanded="false" aria-controls="resetConfirm">
-        <span>恢复初始状态</span><svg aria-hidden="true"><use href="#i-repeat"/></svg>
+        <span>Restore initial state</span><svg aria-hidden="true"><use href="#i-repeat"/></svg>
       </button>
-      <div id="resetConfirm" class="reset-confirm" role="group" aria-label="确认恢复初始状态" hidden>
-        <p class="layout-note reset-copy">收藏和自选定格会被清空，<br>本作品的所有设置将恢复默认。</p>
-        <div class="layout-actions reset-actions"><button type="button" id="cancelReset">取消</button><button type="button" id="confirmReset">确认恢复</button></div>
+      <div id="resetConfirm" class="reset-confirm" role="group" aria-label="Confirm restoring the initial state" hidden>
+        <p class="layout-note reset-copy">Favorites and custom still frames will be cleared,<br>and all settings for this work will return to their defaults.</p>
+        <div class="layout-actions reset-actions"><button type="button" id="cancelReset">Cancel</button><button type="button" id="confirmReset">Confirm restore</button></div>
         <p id="resetFeedback" class="layout-note reset-feedback" role="status" aria-live="polite" hidden></p>
       </div>
     </div>
     </div>
     <div id="helpBody" class="help-body" hidden>
-      <h2 id="helpTitle" tabindex="-1">使用方法</h2>
+      <h2 id="helpTitle" tabindex="-1">Instructions</h2>
 
       <section class="help-section" aria-labelledby="helpStartTitle">
-        <h3 id="helpStartTitle"><span class="help-number" aria-hidden="true">01</span>选择衣橱与穿搭</h3>
-        <p>在衣橱中选择自己喜欢的穿搭。点击衣橱名称切换分组，点击穿搭封面播放视频。</p>
-        <p>切换衣橱只浏览卡片，当前穿搭与对白继续；点击穿搭封面才会换装。「回到播放页」可找到正在播放的穿搭，每个衣橱的本组播放方式仍会分别记住。</p>
-        <p>衣橱标题旁的<span class="help-label">「正序／倒序」</span>可调整排列，每个衣橱分别记忆。未开放穿搭始终放在最后，卡片编号保持不变；顺序轮播跟随排列，从下一套生效，已经开始的换装会先完成。</p>
+        <h3 id="helpStartTitle"><span class="help-number" aria-hidden="true">01</span>Choose a wardrobe and outfit</h3>
+        <p>Choose an outfit you like in the wardrobe. Click a wardrobe name to switch collections, or click an outfit cover to play its video.</p>
+        <p>Switching wardrobes only browses the cards; the current outfit and dialogue continue. Only clicking an outfit cover changes the outfit. “Return to playback” finds the currently playing outfit. Each wardrobe remembers its own collection playback mode.</p>
+        <p>Next to the wardrobe title, <span class="help-label">「Ascending／Descending」</span> changes the order, remembered separately for each wardrobe. Unavailable outfits always remain at the end and card numbers do not change. Sequential playback follows the chosen order starting with the next outfit; an outfit change already underway finishes first.</p>
       </section>
 
       <section class="help-section" aria-labelledby="helpPlaybackTitle">
-        <h3 id="helpPlaybackTitle"><span class="help-number" aria-hidden="true">02</span>切换播放方式</h3>
-        <p>点击底部的播放方式按钮（默认显示<span class="help-label">「定格模式」</span>），可选择以下模式：</p>
+        <h3 id="helpPlaybackTitle"><span class="help-number" aria-hidden="true">02</span>Change playback mode</h3>
+        <p>Click the playback-mode button at the bottom (it shows <span class="help-label">「Still mode」</span>) by default) to choose a mode:</p>
         <dl class="help-modes">
-          <div><dt>定格模式</dt><dd>视频播放到设定时间后，保持画面不动。</dd></div>
-          <div><dt>动态陪伴</dt><dd>首次播放入场，随后持续循环待机动作。带有动态陪伴标记的穿搭支持此模式；点击这些封面会自动开启，也可手动改用其他播放方式。</dd></div>
-          <div><dt>单套循环</dt><dd>重复播放当前穿搭的完整视频。</dd></div>
-          <div><dt>本组轮播</dt><dd>循环播放当前衣橱的开放穿搭。</dd></div>
-          <div><dt>本组收藏</dt><dd>循环播放当前衣橱中已收藏的穿搭。</dd></div>
-          <div><dt>全部轮播</dt><dd>跨越全部衣橱，循环播放全部开放穿搭。</dd></div>
-          <div><dt>全部收藏</dt><dd>跨越全部衣橱，循环播放已收藏的穿搭。</dd></div>
+          <div><dt>Still mode</dt><dd>The video stops at the set time and holds the frame.</dd></div>
+          <div><dt>Animated companion</dt><dd>Plays the entrance once, then continuously loops an idle animation. Outfits marked as supporting Animated Companion mode can use it; clicking their covers enables it automatically, or you can choose another mode manually.</dd></div>
+          <div><dt>Loop this outfit</dt><dd>Repeatedly plays the full video for the current outfit.</dd></div>
+          <div><dt>Play this collection</dt><dd>Loops available outfits in the current wardrobe.</dd></div>
+          <div><dt>Collection favorites</dt><dd>Loops favorited outfits in the current wardrobe.</dd></div>
+          <div><dt>Play all collections</dt><dd>Loops all available outfits across every wardrobe.</dd></div>
+          <div><dt>All favorites</dt><dd>Loops favorited outfits across every wardrobe.</dd></div>
         </dl>
-        <p>全部轮播与全部收藏会单独记住，不改变各衣橱原有的本组播放方式。菜单中的「本组」指正在播放的衣橱。</p>
-        <p>菜单顶部可选<span class="help-label">「顺序／随机」</span>，适用于本组轮播、本组收藏、全部轮播和全部收藏。默认顺序播放；随机会打乱每轮顺序，一轮内不重复，两轮交界也避免连续同一套（范围内只有一套时继续播放该套）。选择会被记住，切换时保留当前视频；正在换装时，完成这次交接后生效。</p>
-        <p class="help-note">首次打开及恢复初始状态后，默认展开经典布局并显示定格画面，不进入沉浸。点击圆形重播按钮，可重新播放入场；播放时，同一按钮可暂停或继续。</p>
+        <p>Play All Collections and All Favorites are remembered separately and do not change each wardrobe’s existing collection mode. “This collection” in the menu means the currently playing wardrobe.</p>
+        <p>At the top of the menu, choose <span class="help-label">「In order／Random」</span> for Play This Collection, Collection Favorites, Play All Collections, and All Favorites. Sequential playback is the default. Random mode shuffles each round without repeats within a round and avoids the same outfit at the boundary between rounds (if there is only one outfit, it continues playing). Your choice is remembered and the current video is preserved when switching; if an outfit change is in progress, the choice takes effect after it finishes.</p>
+        <p class="help-note">On first launch and after restoring defaults, the classic layout opens with a still frame, not immersive mode. Click the circular replay button to replay the entrance; while playing, the same button pauses or resumes.</p>
       </section>
 
       <section class="help-section" aria-labelledby="helpFavoritesTitle">
-        <h3 id="helpFavoritesTitle"><span class="help-number" aria-hidden="true">03</span>收藏与随机换装</h3>
-        <p>点击穿搭旁的爱心可收藏，再次点击取消收藏。收藏后，在播放方式中选择<span class="help-label">「本组收藏」</span>轮播本组，或选择<span class="help-label">「全部收藏」</span>跨衣橱轮播。</p>
-        <p>点击<span class="help-label">「交给心动」</span>随机选择一套穿搭。下方选择<span class="help-label">「本组全部」</span>，从当前衣橱全部开放穿搭中抽选；选择<span class="help-label">「本组偏爱」</span>，只从本组已收藏的穿搭中抽选。</p>
-        <p class="help-note">收藏会实时加入相应轮播队列，只有一套时重复播放；取消最后一套收藏会回到定格模式。没有收藏时，相应的收藏选项不可选。全部收藏期间，手动选择未收藏的普通穿搭会退出轮播并进入定格模式；点击动态陪伴穿搭则会开启动态陪伴。</p>
+        <h3 id="helpFavoritesTitle"><span class="help-number" aria-hidden="true">03</span>Favorites and random outfits</h3>
+        <p>Click the heart beside an outfit to favorite it; click again to remove it. After favoriting, choose <span class="help-label">「Collection favorites」</span> to play favorites in this collection, or choose <span class="help-label">「All favorites」</span> to play favorites across wardrobes.</p>
+        <p>点击<span class="help-label">「Leave it to your heart」</span> randomly selects an outfit. Choose <span class="help-label">「All in this collection」</span> to select from all available outfits in the current wardrobe; choose <span class="help-label">「Favorites in this collection」</span> to select only from favorited outfits in this collection.</p>
+        <p class="help-note">Favorites are added to the relevant playback queue immediately; if there is only one, it repeats. Removing the last favorite returns playback to Still mode. Favorite modes are unavailable when there are no favorites. During All Favorites, manually selecting a non-favorited standard outfit exits the carousel and switches to Still mode; selecting an Animated Companion outfit enables Animated Companion mode.</p>
       </section>
 
-      <div class="help-more" aria-label="更多使用方法">
+      <div class="help-more" aria-label="更多Instructions">
         <details>
-          <summary>播放卡顿时如何调整？<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-          <div class="help-answer"><p>画质选项来自作品提供的实际档位。基础视频按实际分辨率标注；没有可选档位时只显示基础视频。切换画质后会保留进度与暂停状态。</p></div>
+          <summary>How do I adjust playback if it stutters?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="help-answer"><p>Quality options reflect the levels actually provided by the work. The base video is labeled with its actual resolution; if no other levels are available, only the base video is shown. Changing quality preserves playback progress and pause state.</p></div>
         </details>
         <details>
-          <summary>自定义定格画面<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-          <div class="help-answer"><p>点击底部<span class="help-label">「挑选定格」</span>，点击时间轴定位画面，用<span class="help-label">「− / ＋」</span>逐帧微调，再点击<span class="help-label">「就留在这一刻」</span>保存。浏览器中也可拖动时间轴。</p><p>保存后会切换到<span class="help-label">定格模式</span>，并记住当前穿搭的定格时间。点击<span class="help-label">「还原推荐」</span>后再保存，可恢复推荐的定格画面。</p></div>
+          <summary>Customize the still frame<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="help-answer"><p>Click <span class="help-label">「Choose a still frame」</span> at the bottom, click the timeline to position the frame, and use <span class="help-label">「− / ＋」</span> to fine-tune frame by frame. Then click <span class="help-label">「Keep this moment」</span> to save. You can also drag the timeline in a browser.</p><p>After saving, playback switches to <span class="help-label">Still mode</span>，并记住当前穿搭的Still-frame time .点击<span class="help-label">「Restore recommendation」</span> and save again to restore the recommended still frame.</p></div>
         </details>
         <details>
-          <summary>隐藏与显示界面<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-          <div class="help-answer"><p>开启<span class="help-label">「自动收起界面」</span>后，15 秒无操作会隐藏界面，移动鼠标即可显示。</p><p>点击<span class="help-label">「沉浸」</span>可手动隐藏界面，再点击右下角<span class="help-label">「打开衣橱」</span>显示。手动沉浸与退出会记住，暂停恢复不会改变选择。</p><p>Wallpaper Engine 壁纸设置中的<span class="help-label">「启动时界面」</span>可选择<span class="help-label">「记住上次状态」</span>、<span class="help-label">「默认沉浸」</span>或<span class="help-label">「默认显示」</span>。默认记住上次状态；指定默认状态后，每次重新加载会按该状态打开，本次使用中仍可自由显示或隐藏界面。</p></div>
+          <summary>Hide and show the interface<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="help-answer"><p>Enable <span class="help-label">「自动收起界面」</span> and the interface hides after 15 seconds of inactivity; move the mouse to show it again.</p><p>点击<span class="help-label">「Immerse」</span> manually hides the interface. Click <span class="help-label">「Open wardrobe」</span> in the lower-right corner to show it again. Manual immersive mode and exiting it are remembered; pausing and resuming does not change your choice.</p><p>In Wallpaper Engine wallpaper settings, <span class="help-label">「启动时界面」</span> can be set to <span class="help-label">「记住上次状态」</span> or <span class="help-label">「默认Immerse」</span>或<span class="help-label">「默认显示」</span>. The default is to remember the previous state. If a default state is specified, each reload opens in that state, but you can still show or hide the interface freely during the current session.</p></div>
         </details>
         <details>
-          <summary>动态陪伴的对白何时更换？<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-          <div class="help-answer"><p>已有专属对白的穿搭，入场时先说一句，坐稳后再接一句；随后约每 {{dialogueInterval}} 秒更换对白。自动收起界面时仍会静默轮换，重新显示界面就能看到当前那句，不会逐条补播。暂未配置专属对白的穿搭保持安静陪伴。</p><p>主动沉浸、暂停播放、打开设置或挑选定格时，持续对白暂时停止；恢复后重新计时。收藏、换装等操作回应会优先显示。</p></div>
+          <summary>When does Animated Companion dialogue change?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="help-answer"><p>Outfits with dedicated dialogue say one line during entrance and another once settled; afterward, the dialogue changes about every  {{dialogueInterval}}  seconds. Dialogue continues cycling silently while the interface is hidden; when it reappears, you see the current line, without replaying missed lines. Outfits without dedicated dialogue remain quietly companionable.</p><p>Ongoing dialogue pauses when you enter immersive mode manually, pause playback, open settings, or edit a still frame; timing restarts when you resume. Responses to actions such as favoriting or changing outfits take priority.</p></div>
         </details>
         <details>
-          <summary>声音与显示设置<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-          <div class="help-answer"><p>首次使用及恢复初始状态后，声音默认开启，音量为 35。点击底部喇叭，或在设置中切换<span class="help-label">「播放声音」</span>并调整音量；之后会记住你的选择。定格和暂停时不播放视频声音。</p><p>设置按钮位于经典布局右上角、精简布局底部。可在<span class="help-label">「界面布局」</span>中切换经典或精简布局，也可调整<span class="help-label">文字大小</span>、<span class="help-label">视频画质</span>和<span class="help-label">画面明暗</span>。设置底部的<span class="help-label">「个性化」</span>内可调整<span class="help-label">界面位置</span>和<span class="help-label">画面比例</span>，也可关闭或开启<span class="help-label">「装饰亮条」</span>。<span class="help-label">「完整画面」</span>保留全部画面；<span class="help-label">「铺满屏幕」</span>可能裁掉部分边缘。</p></div>
+          <summary>Sound and display settings<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="help-answer"><p>After first use or restoring defaults, sound is enabled by default at volume 35. Click the speaker at the bottom, or toggle <span class="help-label">「Play sound」</span> in settings and adjust the volume; your choice is remembered. Video sound does not play while a still frame is held or playback is paused.</p><p>The settings button is in the upper-right corner of the classic layout and at the bottom of the compact layout. You can switch between classic and compact layouts under <span class="help-label">「Interface layout」</span> and adjust <span class="help-label">Text size</span> or <span class="help-label">Video quality</span> and <span class="help-label">Image brightness</span> . Under <span class="help-label">「Personalization」</span> at the bottom of settings, adjust <span class="help-label">界面位置</span> and <span class="help-label">Aspect ratio</span> and toggle <span class="help-label">「Decorative light strip」</span> .<span class="help-label">「Fit entire image」</span> preserves the full image; <span class="help-label">「Fill screen」</span> may crop some edges.</p></div>
         </details>
         <details>
-          <summary>桌面图标挡住界面怎么办？<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
-          <div class="help-answer"><p>经典布局中，在设置内展开<span class="help-label">「个性化」</span>，即显示左侧对齐线与播放控件边框，并可直接调整位置。用<span class="help-label">「左侧界面左右移动」</span>调整左侧整列；用<span class="help-label">「播放控件上下移动」</span>调整从播放按钮到「挑选定格」的中间一组。点击箭头或滑块预览，点击<span class="help-label">「完成」</span>保存；取消会恢复原位置。收起个性化或关闭设置后，辅助线隐藏。精简布局固定在右下角。</p><p>如需恢复默认位置，点击<span class="help-label">「恢复默认」</span>后再点<span class="help-label">「完成」</span>。</p></div>
+          <summary>What if desktop icons cover the interface?<svg aria-hidden="true"><use href="#i-chevron"/></svg></summary>
+          <div class="help-answer"><p>In the classic layout, expand <span class="help-label">「Personalization」</span> in settings to show the left alignment guide and playback-control outline and adjust their positions. Use <span class="help-label">「Move the left-side interface horizontally」</span> to move the entire left column; use <span class="help-label">「Move playback controls vertically」</span> to move the middle group from the Play button to “Choose a still frame.” Preview with the arrows or slider, then click <span class="help-label">「Done」</span> to save; Cancel restores the original position. The guides are hidden when Personalization is collapsed or settings are closed. The compact layout stays fixed in the lower-right corner.</p><p>To restore the default position, click <span class="help-label">「Restore defaults」</span> and then click <span class="help-label">「Done」</span> .</p></div>
         </details>
       </div>
 
-      <aside class="help-reminders" aria-label="补充说明">
-        <p><strong>定时换装</strong>在设置的<span class="help-label">「偶尔换一套」</span>中直接选择 <span class="help-label">15 秒 / 5 分钟 / 15 分钟</span>，选择<span class="help-label">「关闭」</span>可停止自动换装。也可选择<span class="help-label">「自定义」</span>，输入整数并选择秒或分钟，点击<span class="help-label">「应用」</span>后生效，按钮变为灰色「已应用」；修改数值或单位后可再次应用。最短 1 秒，最长 60 分钟。标题右侧显示当前生效的间隔，尚未应用的输入不会改变它。支持<span class="help-label">定格模式</span>和<span class="help-label">动态陪伴</span>，单套循环与轮播期间暂停执行。定格模式从视频定格开始计时，入场和离场播放时间不计入；有离场动画的普通款，到点先从当前定格接着播放完离场，再换下一套，手动选款仍直接响应；已定格时修改间隔，会从应用时重新计时。自动换装沿用当前随机范围，不唤出界面。</p>
-        <p><strong>动态陪伴定时换装</strong>只在本组支持动态陪伴的穿搭中选择；选择「本组偏爱」时，只选收藏的动态款。入场后开始累计陪伴时间，到点等当前一轮结束再换，因此可能稍晚于设定时间；新穿搭先播放入场，再继续动态陪伴。暂停播放、宿主暂停或操作设置／选帧／播放菜单时暂停计时；恢复后不补换。自动收起和沉浸时仍可静默换装。当前范围没有动态款时暂停换装，只有当前这一套时保持不变。</p>
-        <p><strong class="help-label">恢复初始状态</strong>会清空收藏和自选定格，并恢复本作品的默认设置。</p>
+      <aside class="help-reminders" aria-label="Additional notes">
+        <p><strong>Timed outfit changes</strong> in settings, choose <span class="help-label">「Change outfits occasionally」</span>中 directly, or choose  <span class="help-label">15 seconds / 5 minutes / 15 minutes</span>，选择<span class="help-label">「Off」</span> to stop automatic outfit changes. You can also choose <span class="help-label">「Custom」</span> , enter an integer, select seconds or minutes, and click <span class="help-label">「Apply」</span> to apply it; the button turns gray and reads “Applied.” Apply again after changing the value or unit. The minimum is 1 second and the maximum is 60 minutes. The active interval appears to the right of the heading; unapplied input does not change it. Supported modes are <span class="help-label">Still mode</span> and <span class="help-label">Animated companion</span> . It pauses during single-outfit looping and carousels. In Still mode, timing starts when the video holds on a frame; entrance and exit animation time is excluded. For standard outfits with an exit animation, the exit plays from the current still before the next outfit appears; manual selections still respond immediately. If already holding a frame, changing the interval restarts the timer when applied. Automatic changes use the current random-selection range and do not reveal the interface.</p>
+        <p><strong>Timed changes in Animated Companion mode</strong> selects only outfits in this collection that support Animated Companion. With “Favorites in this collection,” only favorited animated outfits are selected. Companion time starts after the entrance; when time is up, the current cycle finishes before changing outfits, so the change may occur a little later than scheduled. The new outfit plays its entrance before resuming Animated Companion. Timing pauses during playback pause, host pause, or while using settings, still-frame editing, or the playback menu; missed changes are not made after resuming. Outfit changes can happen silently while the interface is hidden or immersive. Changes pause if the selected range contains no animated outfits, and the outfit remains unchanged if it is the only one in the range.</p>
+        <p><strong class="help-label">Restore initial state</strong>clears favorites and custom still frames and restores this work’s default settings.</p>
       </aside>
     </div>
 
   </section>
 
-  <section id="momentPanel" class="panel moment-panel" hidden aria-label="定格编辑器">
-    <div class="panel-top"><span class="micro">YOUR PERFECT MOMENT</span><button id="cancelMoment" class="icon-button" aria-label="取消定格编辑"><svg><use href="#i-close"/></svg></button></div>
-    <h2>这一秒，刚刚好。</h2><p class="panel-subtitle" id="momentHint">点击时间轴定位，用 −／＋ 逐帧微调。</p>
+  <section id="momentPanel" class="panel moment-panel" hidden aria-label="Still-frame editor">
+    <div class="panel-top"><span class="micro">YOUR PERFECT MOMENT</span><button id="cancelMoment" class="icon-button" aria-label="CancelStill编辑"><svg><use href="#i-close"/></svg></button></div>
+    <h2>This second is just right.</h2><p class="panel-subtitle" id="momentHint">Click the timeline to position, then fine-tune frame by frame with − / + .</p>
     <div class="moment-reading"><span id="momentTime">10.50</span><span id="momentDuration"> / 12.03 s</span><span class="moment-look" id="momentLook">{{defaultName}}</span></div>
-    <input id="momentRange" type="range" min="0.1" max="11.98" step="any" value="10.50" aria-label="定格时间">
-    <div class="moment-controls"><div class="frame-controls"><button id="prevFrame" class="icon-button" aria-label="前一帧" title="前一帧">−</button><span>逐帧微调</span><button id="nextFrame" class="icon-button" aria-label="后一帧" title="后一帧">＋</button></div><button id="resetMoment" class="subtle-button">还原推荐</button></div>
-    <button id="saveMoment" class="save-button"><span>就留在这一刻</span><svg><use href="#i-check"/></svg></button>
+    <input id="momentRange" type="range" min="0.1" max="11.98" step="any" value="10.50" aria-label="Still-frame time">
+    <div class="moment-controls"><div class="frame-controls"><button id="prevFrame" class="icon-button" aria-label="Previous frame" title="Previous frame">−</button><span>Fine-tune frame by frame</span><button id="nextFrame" class="icon-button" aria-label="Next frame" title="Next frame">＋</button></div><button id="resetMoment" class="subtle-button">Restore recommendation</button></div>
+    <button id="saveMoment" class="save-button"><span>Keep this moment</span><svg><use href="#i-check"/></svg></button>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite"><small id="toastSpeaker"></small><span id="toastText"></span></div>
-  <div id="loading" class="loading" hidden><span></span> 正在为你准备…</div>
+  <div id="loading" class="loading" hidden><span></span> Preparing for you…</div>
   <script src="catalog.js"></script>
   <script src="dialogue-engine.js"></script>
   <script src="app.js"></script>
