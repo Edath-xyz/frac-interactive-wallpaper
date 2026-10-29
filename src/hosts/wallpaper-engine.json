@@ -10,20 +10,20 @@
     "properties": {
       "look": {
         "order": 1,
-        "text": "初始穿搭",
+        "text": "Initial Outfit",
         "type": "combo",
         "value": "0",
         "options": []
       },
       "sound": {
         "order": 2,
-        "text": "开启声音",
+        "text": "Enable Sound",
         "type": "bool",
         "value": false
       },
       "volume": {
         "order": 3,
-        "text": "声音大小",
+        "text": "Volume",
         "type": "slider",
         "value": 35,
         "min": 0,
@@ -33,7 +33,7 @@
       },
       "brightness": {
         "order": 4,
-        "text": "画面明暗",
+        "text": "Screen Brightness",
         "type": "slider",
         "value": 100,
         "min": 65,
@@ -43,46 +43,46 @@
       },
       "autohide": {
         "order": 5,
-        "text": "15 秒后自动收起界面",
+        "text": "Automatically Hide Interface After 15 Seconds",
         "type": "bool",
         "value": true
       },
       "fit": {
         "order": 6,
-        "text": "画面比例",
+        "text": "Screen Aspect Ratio",
         "type": "combo",
         "value": "contain",
         "options": [
           {
-            "label": "完整画面",
+            "label": "Fit Entire Image",
             "value": "contain"
           },
           {
-            "label": "铺满屏幕",
+            "label": "Fill Screen",
             "value": "cover"
           }
         ]
       },
       "autoswitch": {
         "order": 7,
-        "text": "自动换装间隔",
+        "text": "Automatic Outfit Change Interval",
         "type": "combo",
         "value": "0",
         "options": [
           {
-            "label": "等我来选",
+            "label": "Let Me Choose",
             "value": "0"
           },
           {
-            "label": "每 5 分钟",
+            "label": "Every 5 Minutes",
             "value": "5"
           },
           {
-            "label": "每 15 分钟",
+            "label": "Every 15 Minutes",
             "value": "15"
           },
           {
-            "label": "每 30 分钟",
+            "label": "Every 30 Minutes",
             "value": "30"
           }
         ]
