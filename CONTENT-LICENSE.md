@@ -1,15 +1,13 @@
-# 示例内容使用说明
+# Instructions for Use of Sample Content
 
-本仓库的代码与工具依根目录 0BSD `LICENSE` 授权。**0BSD 不适用于随附的示例视频、图片及示例对白。**
+The code and tools in this repository are licensed under the 0BSD license (see the `LICENSE` file in the root directory). **The 0BSD license does not apply to the included sample videos, images, or sample dialogue.**
 
-示例内容包括薄纱晚风、簪花小令、靛蓝晚风、紫暮长靴四套视频，各自的封面与推荐定格图，衣橱背景图，`content` 中的示例对白，以及 `docs/images` 中展示这些内容的界面截图。来源：FRAC_LAB / PURPLE。
+The sample content consists of four sets of videos—"Sheer Evening Breeze," "Floral-Adorned Lyric," "Indigo Evening Breeze," and "Purple Twilight Boots"—along with their respective cover images, recommended still frames, wardrobe background images, the sample dialogue found in the `content` folder, and interface screenshots displayed in `docs/images`. Source: FRAC_LAB / PURPLE.
 
-这些内容只供下载本模板后的个人学习、本地预览和功能测试。不授权将其用于商用，或随你制作的壁纸、视频、素材包等作品对外发布；非商业发布也需要替换。不要仅通过改名、裁剪、转码或改写少数字词，将示例内容当作自己的素材发布。
+This content is provided solely for personal study, local previewing, and functional testing after downloading this template. It is not licensed for commercial use, nor for distribution as part of any wallpapers, videos, asset packs, or other works you may create; even for non-commercial distribution, these assets must be replaced. You may not present the sample content as your own by simply renaming, cropping, transcoding, or making minor textual edits.
 
-本模板在 GitHub 公开时，平台内的查看与 Fork（仓库分支复制）适用 GitHub 服务条款。Fork 中仍包含示例内容时，应保留这些内容的使用说明与来源；代码部分按 0BSD 使用，无需保留原作者署名。平台允许的查看和 Fork 不代表另行授予示例内容的商用或作品再发布许可。参见 [GitHub 仓库授权说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository)。
+When this template is accessed or forked on GitHub, such actions are subject to the GitHub Terms of Service. If a fork retains the sample content, the associated usage instructions and source attribution must also be preserved. The code itself remains under the 0BSD license, which does not require attribution to the original author. Accessing or forking the repository on the platform does not grant any additional rights for commercial use or redistribution of the sample content. Please refer to the [GitHub documentation on repository licensing](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
 
-发布前，请使用你自行制作或已取得相应用途授权的视频、图片与对白，并自行确认角色、音乐、字体等相关权利。模板不向你授予第三方角色、人物形象、音乐或商标的权利，也不保证你添加的内容适合特定用途。
+Before publishing any work, please ensure that you use videos, images, and dialogue that you have created yourself or for which you have obtained the appropriate usage rights. You are also responsible for verifying the rights status of characters, music, fonts, and other elements. This template does not grant you any rights to third-party characters, character likenesses, music, or trademarks, nor does it guarantee that the content you add is suitable for any specific purpose.
 
-`pack --demo` 仅生成本地宿主预览包，不构成对示例内容的再发布许可。正常 `pack` 会检查已登记的样片文件和示例对白，但工具无法判断所有衍生内容或你自行加入的素材的权利状态。
-
-代码的 0BSD 许可与示例内容的使用范围相互独立。更换全部示例内容后，可依 0BSD 使用代码制作、发布自己的作品，无需提及原作者，也无需保留本项目的版权声明或许可文本；第三方组件遵循各自许可。你自己的内容应采用你有权选择的授权方式，相关权利与发布事务由你自行负责。使用代码不代表原作者参与、出品或认可衍生作品。
+The `pack --demo` command is intended solely for generating a local preview package; it does not constitute a license to redistribute the sample content. While the standard `pack` command checks for registered sample files and dialogue, the tool cannot determine the rights status of all derivative content or any additional assets you may have included. The 0BSD license for the code and the terms governing the use of the sample content are independent of each other. Once all sample content has been replaced, you may use the code under the 0BSD license to create and distribute your own works without needing to credit the original author, nor are you required to retain the copyright notice or license text from this project. Third-party components are subject to their own respective licenses. You are responsible for determining the appropriate licensing for your own content, as well as for all matters concerning its rights and distribution. The use of this code does not imply that the original author has participated in, produced, or endorsed any derivative works.
