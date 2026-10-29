@@ -50,7 +50,7 @@
       // The old deck is still intact. Keep it usable if the chosen file fails.
       releaseSpare();
       prefs.quality = previousQuality; persist();
-      if (error.name !== 'AbortError') toast('这档画质暂时无法加载，已保留原画质。', '播放提示');
+      if (error.name !== 'AbortError') toast('This quality level cannot be loaded at the moment; the original quality has been retained.', 'Playback Notice');;
     }
     if (task.id !== operation) return;
     phase = previousPhase;
