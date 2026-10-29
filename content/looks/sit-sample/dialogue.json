@@ -3,31 +3,31 @@
   "entries": [
     {
       "id": "entry-1",
-      "enter": "这花我戴了好半天，还是有点怕两边不一样。",
-      "held": "（有点不好意思）要是你在旁边就好了，还能帮我看一眼。"
+      "enter": "I've been wearing this flower for quite a while, but I'm still a little worried the two sides might look uneven.",
+      "held": "(A little embarrassed) I wish you were here beside me. You could help me check how it looks."
     },
     {
       "id": "entry-2",
-      "enter": "今天这花，我还挺舍不得弄乱的。",
-      "held": "（声音轻下来）不过，要是你想抱我……乱一点也没关系。"
+      "enter": "I'm rather reluctant to mess up these flowers today.",
+      "held": "(Her voice softens) But if you want to hug me... a little messiness wouldn't matter."
     }
   ],
   "restored": [
     {
       "id": "restored-1",
-      "text": "今天打扮得这么认真，也想跟你好好说会儿话。"
+      "text": "I've put so much care into getting dressed today. I also want to spend some quality time talking with you."
     }
   ],
   "random": [
     {
       "id": "random-1",
-      "text": "这次要戴花啦，等我收拾一下。"
+      "text": "I'm going to wear flowers this time. Just let me get ready."
     }
   ],
   "affectionScenes": [
     {
-      "enter": "这身穿着去约会，走路都想慢一点。",
-      "held": "（声音轻下来）想挽着你，多走一小段。"
+      "enter": "I want to take my time walking when I'm dressed like this for a date.",
+      "held": "(Her voice softens) I want to link arms with you and walk together a little farther."
     }
   ]
 }
