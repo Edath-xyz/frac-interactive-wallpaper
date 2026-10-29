@@ -1,63 +1,61 @@
-# 对白 DIY
+# Dialogue DIY
 
-每套只改 `content/looks/<id>/dialogue.json`；全局操作回应在 `content/shared-dialogue.json`。直接用 UTF-8 JSON 编辑，或让 AI 按下面格式生成一个文件，再用导入命令校验。Markdown 可以作为创作稿，运行时以 JSON 为准，不让解析器猜测随意排版的段落。
+For each outfit, modify only `content/looks/<id>/dialogue.json`; for global responses, edit `content/shared-dialogue.json`. Edit the files directly as UTF-8 JSON, or have an AI generate the file following the format below, then use the import command to validate it. You may use Markdown for drafting, but the system relies on JSON at runtime to ensure the parser doesn't have to guess the structure of arbitrarily formatted text.
 
-## 基本格式
+## Basic Format
 
 ```json
 {
-  "enabled": true,
-  "entries": [
-    {"id": "entry-1", "enter": "今天想早点来见你。", "held": "现在坐下来，就不着急走了。"}
-  ],
-  "restored": [{"id": "restored-1", "text": "我还在这里，慢慢来。"}],
-  "random": [{"id": "random-1", "text": "今天就穿这一套陪你。"}],
-  "affectionScenes": [{"enter": "让我靠近一点。", "held": "这样就很好。"}]
+"enabled": true,
+"entries": [
+{"id": "entry-1", "enter": "I wanted to see you a bit earlier today.", "held": "Now that I’m sitting here, there’s no rush to leave."}
+],
+"restored": [{"id": "restored-1", "text": "I’m still here—take your time."}],
+"random": [{"id": "random-1", "text": "I’m wearing this outfit for you today."}],
+"affectionScenes": [{"enter": "Let me get a little closer.", "held": "This is perfect."}]
 }
 ```
 
-以上是结构示意，不要求照抄。所有启用的普通款至少一组成对入场接话、一条 restored、一条 random。`affectionScenes` 可为空数组。
-
-| 字段 | 触发场景 |
+The above is a structural example; you do not need to copy it verbatim. For every enabled outfit, you must provide at least one pair of "enter" and "held" lines, one "restored" line, and one "random" line. `affectionScenes` may be an empty array. | Field | Trigger Scenario |
 | --- | --- |
-| `entries[].enter` | 点击穿搭开始入场 |
-| 同一条 `held` | 到定格点／动态循环起点后接上；必须能接住 enter |
-| `restored` | 恢复当前穿搭等适用入口 |
-| `random` | 随机选中这套时的回应 |
-| `affectionScenes` | 普通款累计相应入口次数后，替代一次普通入场接话 |
+| `entries[].enter` | Triggered when an outfit is selected, initiating the entry sequence. |
+| `held` (within the same entry) | Follows the "freeze frame" point or the start of an animation loop; must transition seamlessly from the `enter` sequence. |
+| `restored` | Used when returning to the current outfit (e.g., after resuming from a different state). |
+| `random` | Triggered when this outfit is selected via a random choice. |
+| `affectionScenes` | Replaces a standard entry line once a specific threshold of entry counts is reached for a "standard" (non-dynamic) outfit. |
 
-动态款另外需要以下两个数组：
+For "dynamic" (animated) outfits, the following two arrays are also required:
 
 ```json
 {
-  "continuous": [{"id": "continuous-1", "text": "你忙你的，我在这儿陪一会儿。", "topic": "company"}],
-  "affection": [{"id": "affection-1", "text": "现在这样靠近你，我很喜欢。"}]
+"continuous": [{"id": "continuous-1", "text": "Go ahead with what you're doing; I'll just keep you company here for a while.", "topic": "company"}],
+"affection": [{"id": "affection-1", "text": "I really like being this close to you."}]
 }
 ```
 
-这是要加进完整对象的两个字段；`restored`、`random` 和 `entries` 仍然需要。持续陪伴初始样片为 10 条，数量可以自行调整。`topic` 可选，用于减少连续近似话题。
+These are two additional fields to be included in the complete object; `restored`, `random`, and `entries` are still required. The initial set for "continuous" (ongoing companionship) dialogue consists of 10 entries, though this number can be adjusted as needed. The `topic` field is optional and is used to prevent the repetition of similar topics in sequence.
 
-## 计时与亲昵
+## Timing and Affection
 
-默认每 30 秒轮换动态对白，在 `project.dialogueIntervalSeconds` 修改（5–3600 秒）。只有实际可见的持续对白才累计亲昵次数，默认 5 条后在下次轮换使用一条 affection，随后重新计数；阈值在 `project.affectionAfter`。没有额外时间冷却。
+By default, dynamic dialogue cycles every 30 seconds; this can be adjusted via `project.dialogueIntervalSeconds` (range: 5–3600 seconds). Only dialogue that is actually visible to the user contributes to the "affection" count. By default, after 5 lines of dialogue, the next cycle will trigger an `affection` line, after which the counter resets; this threshold is defined by `project.affectionAfter`. There is no additional cooldown period.
 
-普通款的低频亲昵按对应入口累计 4 次。暂停、后台、面板、主动沉浸会影响对白时钟；自动收起时可以静默更新持续句，但不消耗亲昵机会。不要通过缩短视频或另加定时器来修改对白频率。
+For "standard" (non-dynamic) outfits, an "affection" event is triggered after 4 uses of a specific entry point. Actions such as pausing, moving the app to the background, opening UI panels, or entering "immersive mode" will pause the dialogue timer. When the interface automatically collapses, "continuous" dialogue lines may update silently without consuming an "affection" opportunity. Do not attempt to modify dialogue frequency by shortening video clips or adding external timers.
 
-## 增删与导入
+## Adding, Removing, and Importing
 
-每条 ID 在本套内唯一。修改句子内容可保留 ID；新增句子用新 ID；删除直接移除整条记录。不要把某套句子按卡片位置映射到另一套。入场与 held 放在同一个对象中，避免两个数组长度对不上。
+Each `id` must be unique within a given outfit set. You may modify the text content of a line while keeping its existing `id`; new lines must be assigned a new `id`; to delete a line, simply remove the entire record. Do not map one set of dialogue lines to another based on card slot positions. Keep the "entry" (arrival) lines and the "held" (interaction) lines within the same object to ensure the lengths of the corresponding arrays remain synchronized.
 
 ```powershell
-python -X utf8 tools/project.py dialogue --id sit-companion --file "新对白.json"
-python -X utf8 tools/project.py dialogue --id sit-companion --file "新对白.json" --apply
+python -X utf8 tools/project.py dialogue --id sit-companion --file "new_dialogue.json"
+python -X utf8 tools/project.py dialogue --id sit-companion --file "new_dialogue.json" --apply
 python -X utf8 tools/project.py check
 python -X utf8 tools/project.py build
 ```
 
-导入器只替换指定穿搭的对白，写入前校验并备份，不改视频或其他穿搭。也可直接编辑原文件后运行检查。
+The importer only replaces dialogue for the specified outfit; it performs validation and creates a backup before writing, leaving video files and other outfits untouched. Alternatively, you can edit the original files directly and then run the check command.
 
-暂时不需要对白时把文件设为 `{"enabled":false}`。这会清理该套显示的旧句子并停用其对白，不会静音视频本身。
+If you wish to temporarily disable dialogue, set the file content to `{"enabled":false}`. This will clear any previously displayed lines for that set and deactivate the dialogue, though it will not mute the video itself.
 
-共享操作回应包括收藏、取消收藏、重播、暂停、继续、选帧、保存、取消、恢复定格、唤醒。保留 `shared-dialogue.json` 中这些键；某项不想回应时可用空数组。`fixed` 是切换播放方式等短句。发布前同样需要替换其中的示例原文。
+Shared action responses include: favorite, unfavorite, replay, pause, resume, select frame, save, cancel, resume from freeze, and wake up. Keep these keys in `shared-dialogue.json`; if you do not wish to provide a response for a specific action, you may use an empty array. The `fixed` key is for short phrases, such as those used when toggling playback modes. Please ensure that any example text within these fields is replaced before publication.
 
-编写时参考 `PERSONA.md`，围绕“今天以这个状态来陪用户”的具体情境，保留自然互动感。角色、关系和措辞由创作者决定，代码不强制使用示例人物。
+When writing, refer to `PERSONA.md` and focus on the specific scenario—"accompanying the user in this particular state"—while maintaining a sense of natural interaction. The character, their relationship with the user, and the specific phrasing are entirely up to the creator; the code does not mandate the use of the example persona.
