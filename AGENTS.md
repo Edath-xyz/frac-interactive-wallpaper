@@ -1,18 +1,17 @@
-# 本地 AI 工作入口
+# Local AI Workflow Entry Point
 
-这是独立的 FRAC_桌面互动壁纸 DIY 模板。只以本仓库文件和用户当前要求为依据；不依赖作者的其他工程、磁盘、私人聊天或旧交付包。
+This is a standalone DIY template for FRAC interactive desktop wallpapers. It relies exclusively on the files within this repository and the user's current requirements; it does not depend on the author’s other projects, local disk files, private chat history, or legacy delivery packages.
 
-1. 先读 README、`docs/ARCHITECTURE.md`，运行 `python tools/project.py doctor`；检查已有 Git 修改，不覆盖用户未提交内容。
-2. 视频任务读 `docs/MEDIA.md`；对白任务读 `docs/DIALOGUE.md`；发布任务读 `docs/PUBLISH.md`。按任务读取，勿整库扫描视频或历史缓存。
-3. 用户内容在 `content`。每套穿搭一个文件夹；`look.json` 与 `dialogue.json` 是可编辑源。`src/player` 保留播放实现，普通素材任务不重写播放器。
-4. `preview`、`dist` 是生成物，不能当母版编辑。构建使用 `python tools/project.py build`。不从其他项目或旧包覆盖当前源码。
-5. 新增新 ID；替换同套保留 ID、hostValue 和对白 ID。衣橱显示顺序不决定身份。不得为了绕过检查而给旧 ID 换身份、重置所有偏好、删除检查或修改样片登记哈希。
-6. 不猜视频的定格点、循环起点或是否存在离场动作。让用户提供，或在授权的视频分析中确定后明确报告；不能仅靠名称判断。动态陪伴循环点以秒填写，工具转为帧。
-7. 对白先理解角色和情境；保留用户批准原文。入场与定格接话成对编辑；新增对白使用稳定 ID。无对白时用 `enabled:false`，不残留上一套句子。角色信息见 `docs/PERSONA.md`。
-8. 新视频命令默认只列计划；用户已授权接入后可直接核对计划并 `--apply`，不再反复索取许可。原视频只读；修改留下 `.history`。不删除项目外文件，不把原片当缓存。
-9. 完成后至少 `check` 和 `build`；视频变更加 `check --media` 与相关浏览器检查；配置／工具变更加单元及工作流测试。测试使用临时副本或隔离浏览器。不能在用户现用 WE/Lively 配置上重置数据。
-10. 默认交付本地 HTML 路径。不要自动打开浏览器或起常驻服务器。确需 HTTP 验证时用 `tools/serve.cjs`（支持 Range，随机端口），结束后关闭自己启动的进程。
-11. 开源代码是 0BSD；使用者制作、发布作品无需署名原作者或保留本项目许可文本，不要自动添加水印或宣传链接。样片仅学习、本地预览，第三方组件遵循各自许可。禁止把 `--demo` 当作绕过正式发布检查的方法。发布前按 `CONTENT-LICENSE.md` 替换素材与对白。打包、上传或创建远程仓库只在用户要求范围内执行。
-12. 报告必须区分：源码与预览、导出与上传、浏览器功能与真实桌面宿主体验。没有实际测量，不声称无 bug、所有设备顺滑或已取得素材授权。
+1. Begin by reading the README and `docs/ARCHITECTURE.md`, then execute `python tools/project.py doctor`. Review existing Git modifications, ensuring that any uncommitted user changes are not overwritten.
+2. Consult `docs/MEDIA.md` for video-related tasks, `docs/DIALOGUE.md` for dialogue tasks, and `PUBLISH.md` for publishing tasks. Access documentation based on the specific task at hand; do not perform a bulk scan of the entire repository for video files or historical cache data.
+3. User content is located in the `content` directory. Each outfit/look should have its own dedicated folder, containing editable source files: `look.json` and `dialogue.json`. The `src/player` directory houses the playback implementation; do not rewrite the player for standard asset-related tasks.
+4. The `preview` and `dist` directories contain generated artifacts and should not be edited as source masters. Use `python tools/project.py build` for the build process. Do not overwrite current source code with files from other projects or legacy packages.
+5. Assign new IDs for new entries. When updating an existing look, retain the original IDs, `hostValue`, and dialogue IDs. The display order in the wardrobe does not define the character's identity. It is strictly prohibited to reassign identities to existing IDs, reset user preferences, bypass validation checks, or alter the registration hashes of sample assets.
+6. Do not make assumptions regarding video freeze-frames, loop start points, or the presence of exit animations. These must be provided by the user or explicitly determined and reported through authorized video analysis—never infer them based on filenames alone. For dynamic companion loops, specify the loop point in seconds; the tool will automatically convert this into frames.
+7. For dialogue, ensure a clear understanding of the character and the context; retain the original text as approved by the user. Entry sequences and freeze-frame dialogue cues should be edited as paired sets. Use stable IDs for any new dialogue. If no dialogue is required, set `enabled: false`—do not leave residual sentences from previous outfits. Refer to `docs/PERSONA.md` for character information. 8. The `new-video` command defaults to generating a plan; once the user has granted access, they can review the plan and execute `--apply` directly, without being prompted for permission repeatedly. Original video files are treated as read-only; any modifications are tracked via `.history` files. The tool will not delete files outside the project directory, nor will it treat original source videos as cache.
+9. After any operation, at least `check` and `build` must be performed. Changes to video assets require `check --media` and relevant browser-based validation; changes to configuration or tools require unit and workflow testing. Testing must be conducted using temporary copies or isolated browser instances. Data must never be reset within the user’s active WE/Lively configuration.
+10. The default output is a local HTML file path. Do not automatically launch a browser or start a persistent server. If HTTP-based verification is strictly necessary, use `tools/serve.cjs` (which supports byte-range requests and random port assignment), and ensure the process is terminated once verification is complete.
+11. The source code is licensed under 0BSD; users are not required to provide attribution or include the project’s license text when creating or publishing their own works. Do not automatically inject watermarks or promotional links. Sample assets are provided solely for learning and local preview purposes; third-party components remain subject to their respective licenses. The `--demo` flag must not be used as a workaround to bypass formal release checks. Before publication, all assets and dialogue must be replaced in accordance with `CONTENT-LICENSE.md`. Packaging, uploading, or creating remote repositories shall only be performed at the user’s explicit request.
+12. Reports must clearly distinguish between source code and previews, exports and uploads, and browser-based functionality versus the actual desktop host experience. Do not make claims regarding the absence of bugs, smooth performance across all devices, or the acquisition of rights for any assets unless they have been empirically verified.
 
-固定入口不累加聊天流水账。重要接口变化同步对应 docs；验证证据放 `.qa`，仅将简洁结果写入 `docs/VERIFICATION.md`。
+Maintain a clean entry point; do not accumulate chat logs. Any significant changes to interfaces must be reflected in the documentation. Evidence of verification should be stored in the `.qa` directory, with only a concise summary recorded in `docs/VERIFICATION.md`.
