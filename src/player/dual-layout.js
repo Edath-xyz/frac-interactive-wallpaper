@@ -13,18 +13,18 @@
     if (html) node.innerHTML = html;
     return node;
   };
-  const toggle = element('button', 'layout-switch text-button', `${svg('frame')}<span>精简布局</span>`);
+  const toggle = element('button', 'layout-switch text-button', `${svg('frame')}<span>Compact layout</span>`);
   toggle.id = 'layoutSwitch'; toggle.type = 'button';
-  toggle.title = '切换布局，保留当前播放';
+  toggle.title = 'Switch layout while keeping current playback';
   document.querySelector('.top-right').prepend(toggle);
-  const header = element('div', 'island-drawer-heading', '<span class="island-drawer-title">她的衣橱</span><div class="island-drawer-actions"></div>');
+  const header = element('div', 'island-drawer-heading', '<span class="island-drawer-title">Her Wardrobe</span><div class="island-drawer-actions"></div>');
   header.querySelector('.island-drawer-title').textContent = window.PURPLE_PROJECT.wardrobeTitle;
   const close = element('button', 'icon-button', svg('close'));
-  close.type = 'button'; close.setAttribute('aria-label', '收起衣橱');
+  close.type = 'button'; close.setAttribute('aria-label', 'Collapse wardrobe');
   header.querySelector('div').append(close);
   wardrobe.prepend(header); wardrobe.id = 'wardrobePanel';
   const bar = element('div', 'island-bar');
-  const opener = element('button', 'island-opener', `<img id="islandThumb" alt=""><span><strong id="islandName"></strong><small><span id="islandWardrobeHint">展开衣橱</span>${svg('chevron')}</small></span>`);
+  const opener = element('button', 'island-opener', `<img id="islandThumb" alt=""><span><strong id="islandName"></strong><small><span id="islandWardrobeHint">Expand wardrobe</span>${svg('chevron')}</small></span>`);
   opener.type = 'button'; opener.id = 'islandWardrobe';
   opener.setAttribute('aria-controls', wardrobe.id); opener.setAttribute('aria-expanded', 'false');
   const actions = element('div', 'island-actions');
@@ -36,16 +36,16 @@
   const reply = element('p', 'island-reply'); reply.id = 'islandReply';
   reply.setAttribute('role', 'status'); reply.setAttribute('aria-live', 'polite');
   status.querySelector('div').append(reply);
-  const settingsLayout = element('section', 'layout-preference', '<div class="setting-line"><label>界面布局</label><output id="layoutValueLabel">精简布局</output></div><div class="setting-options" id="layoutChoices"><button type="button" data-interface="normal">经典布局</button><button type="button" data-interface="island">精简布局</button></div>');
+  const settingsLayout = element('section', 'layout-preference', '<div class="setting-line"><label>Interface layout</label><output id="layoutValueLabel">Compact layout</output></div><div class="setting-options" id="layoutChoices"><button type="button" data-interface="normal">Classic layout</button><button type="button" data-interface="island">Compact layout</button></div>');
   $('settingsBody').querySelector('.panel-subtitle').after(settingsLayout);
-  const positionNote = element('p', 'island-position-note', '精简布局固定在右下方，衣橱向上展开。切回经典布局后，可继续调整左列与播放栏的位置。');
+  const positionNote = element('p', 'island-position-note', 'Compact layout is fixed in the bottom-right corner, with the wardrobe expanding upward. After switching back to classic layout, you can continue adjusting the position of the left column and playback bar.');
   $('layoutControls').after(positionNote);
   // Wallpaper hosts may forward clicks but not wheel/drag gestures. Keep page
   // navigation outside the scrolling content so every setting stays reachable.
   function installPager(container, scrollers, prefix, hint, enabled = () => true) {
-    const pager = element('nav', 'overflow-pager', `<button id="${prefix}PageUp" type="button">${svg('chevron')}<span>向上</span></button><span id="${prefix}PageHint">${hint}</span><button id="${prefix}PageDown" type="button"><span>向下</span>${svg('chevron')}</button>`);
+    const pager = element('nav', 'overflow-pager', `<button id="${prefix}PageUp" type="button">${svg('chevron')}<span>Up</span></button><span id="${prefix}PageHint">${hint}</span><button id="${prefix}PageDown" type="button"><span>Down</span>${svg('chevron')}</button>`);
     pager.id = prefix + 'Pager'; pager.hidden = true;
-    pager.setAttribute('aria-label', hint + '翻页'); container.append(pager);
+    pager.setAttribute('aria-label', hint + ' pagination'); container.append(pager);
     let frame = 0;
     const active = () => scrollers.find(node => !node.hidden);
     function update() {
@@ -59,7 +59,7 @@
       const atStart = scroller.scrollTop <= 1, atEnd = scroller.scrollTop >= scroller.scrollHeight - scroller.clientHeight - 1;
       $(prefix + 'PageUp').disabled = atStart; $(prefix + 'PageDown').disabled = atEnd;
       for (const suffix of ['PageUp', 'PageDown']) $(prefix + suffix).setAttribute('aria-controls', scroller.id);
-      $(prefix + 'PageHint').textContent = atEnd ? '已到底部' : atStart ? (scroller.id === 'helpBody' ? '更多说明' : hint) : '点击翻页';
+      $(prefix + 'PageHint').textContent = atEnd ? 'End of content' : atStart ? (scroller.id === 'helpBody' ? 'More information' : hint) : 'Click to turn page';
     }
     function queue() { cancelAnimationFrame(frame); frame = requestAnimationFrame(update); }
     for (const [suffix, direction] of [['PageUp', -1], ['PageDown', 1]]) {
@@ -78,13 +78,13 @@
     for (const event of ['purple:typography-change', 'purple:layout-change', 'resize']) window.addEventListener(event, queue);
     return queue;
   }
-  installPager($('settingsPanel'), [$('settingsBody'), $('helpBody')], 'settings', '更多设置');
+  installPager($('settingsPanel'), [$('settingsBody'), $('helpBody')], 'settings', 'More settings');
   const wardrobeBody = document.querySelector('.wardrobe-content'); wardrobeBody.id = 'wardrobeBody';
-  installPager(wardrobe, [wardrobeBody], 'wardrobe', '更多选项', () => body.dataset.layout === 'island');
+  installPager(wardrobe, [wardrobeBody], 'wardrobe', 'More options', () => body.dataset.layout === 'island');
   const modeMenu = $('modeMenu'), modeBody = element('div', 'mode-scroll'); modeBody.id = 'modeBody';
   for (const node of [...modeMenu.children]) if (!node.matches('.mode-heading, .mode-order')) modeBody.append(node);
   modeMenu.append(modeBody);
-  installPager(modeMenu, [modeBody], 'mode', '更多方式');
+  installPager(modeMenu, [modeBody], 'mode', 'More modes');
   const homes = new Map();
   function move(node, parent, before = null) {
     if (!homes.has(node)) { const anchor = document.createComment('normal-layout'); node.before(anchor); homes.set(node, anchor); }
@@ -93,10 +93,10 @@
   function restore(node) { const anchor = homes.get(node); if (anchor) anchor.after(node); }
   let layout = 'normal', frame = 0, openAfterPanel = false;
   function updateOpener() {
-    const action = body.classList.contains('is-wardrobe-open') ? '收起衣橱' : '展开衣橱';
-    const hint = body.classList.contains('is-spinning') ? '正在挑选…' : action;
+    const action = body.classList.contains('is-wardrobe-open') ? 'Collapse wardrobe' : 'Expand wardrobe';
+    const hint = body.classList.contains('is-spinning') ? 'Choosing…' : action;
     if ($('islandWardrobeHint').textContent !== hint) $('islandWardrobeHint').textContent = hint;
-    opener.setAttribute('aria-label', `${$('islandName').textContent}，${action}`);
+    opener.setAttribute('aria-label', `${$('islandName').textContent}, ${action}`);
   }
   function setDrawer(open, focus = false) {
     const visible = layout === 'island' && open;
@@ -129,7 +129,7 @@
     if ($('islandThumb').getAttribute('src') !== src) $('islandThumb').src = src;
     updateOpener();
     favorite.setAttribute('aria-pressed', String(state.favorite));
-    favorite.setAttribute('aria-label', `${state.favorite ? '取消偏爱' : '偏爱'}${state.name}`);
+    favorite.setAttribute('aria-label', `${state.favorite ? 'Remove favorite' : 'Favorite'} ${state.name}`);
     favorite.title = favorite.getAttribute('aria-label');
     const hasPanel = body.classList.contains('has-panel');
     $('settingsButton').setAttribute('aria-expanded', String(!$('settingsPanel').hidden));
@@ -138,7 +138,7 @@
     opener.disabled = hasPanel;
     const choosing = body.classList.contains('is-spinning');
     shuffle.setAttribute('aria-busy', String(choosing));
-    shuffle.setAttribute('aria-label', choosing ? '正在挑选穿搭' : $('randomButton').getAttribute('aria-label'));
+    shuffle.setAttribute('aria-label', choosing ? 'Choosing an outfit' : $('randomButton').getAttribute('aria-label'));
     shuffle.title = shuffle.getAttribute('aria-label') || '';
     const showReply = layout === 'island' && $('toast').classList.contains('show') && $('toastSpeaker').textContent.startsWith('她说');
     body.classList.toggle('is-island-reply', showReply);
@@ -166,9 +166,9 @@
       restore(toggle);
       restore($('wardrobeOrder'));
     }
-    toggle.querySelector('span').textContent = next === 'island' ? '经典布局' : '精简布局';
-    toggle.setAttribute('aria-label', `切换到${next === 'island' ? '经典布局' : '精简布局'}`);
-    $('layoutValueLabel').textContent = next === 'island' ? '精简布局' : '经典布局';
+    toggle.querySelector('span').textContent = next === 'island' ? 'Classic layout' : 'Compact layout';
+    toggle.setAttribute('aria-label', `Switch to ${next === 'island' ? 'Classic layout' : 'Compact layout'}`);
+    $('layoutValueLabel').textContent = next === 'island' ? 'Compact layout' : 'Classic layout';
     $('layoutChoices').querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.interface === next)));
     // Show the wardrobe when entering this layout, including from Settings.
     // An open settings panel takes priority; reveal the wardrobe when it closes.
