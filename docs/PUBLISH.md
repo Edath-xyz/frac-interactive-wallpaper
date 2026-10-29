@@ -1,46 +1,44 @@
-# 发布与源码分享
+# Distribution and Source Code Sharing
 
-## 先区分两种包
+## Distinguishing Between Package Types
 
-- `source`：代码、工具、文档及四个学习样片的模板源码包。保留 `LICENSE`、`CONTENT-LICENSE.md` 和 `NOTICE.md`。
-- `pack`：用户自己的壁纸运行包。默认进行示例内容检查；`--demo` 仅用于自己的本地宿主预览，不能拿来对外发布。
+- `source`: A source code package containing code, tools, documentation, and templates for four sample projects. Please retain the `LICENSE`, `CONTENT-LICENSE.md`, and `NOTICE.md` files.
+- `pack`: A distribution package for your own wallpaper project. By default, the tools will check for the presence of sample content; the `--demo` flag is intended solely for local previewing and must not be used for public distribution.
 
-作者提供四个样片用于本模板的学习预览，不授权使用者把这些素材随自己的作品再发布。0BSD 只覆盖代码和相应开发文档，不替代素材授权。
+The four sample projects provided are for learning and preview purposes only. You are not authorized to redistribute these assets as part of your own work. The 0BSD license applies only to the code and development documentation; it does not grant rights to the included assets.
 
-## 制作自己的发布包
+## Creating Your Distribution Package
 
-1. 用 `init` 设置独立 `id`、标题与作者；按自己的作品修改品牌、角色称呼和描述。首次发布前完成，后续更新保持同一个作品 ID。
-2. 替换四套视频、封面、定格图、两个背景图、各套对白及共享对白；也可以删除不需要的示例套装。使用你有权发布的内容。
-3. 核对所有 `look.json` 的 `sample:false`。项目确实不含示例内容后，将 `content/project.json` 中 `sample` 设为 false。单改标记不能替代素材替换，工具还会检查登记的文件和句子指纹。
-4. 核对 WE 的内容分级及其他宿主属性：模板在 `src/hosts/wallpaper-engine.json`，不包含原作者工坊 ID。按实际内容选择分级，不借模板替你判断。
-5. 按 `TESTING.md` 检查，并在目标壁纸软件中自己预览。确认封面、声音、缩放与循环符合预期。
-
+1. Use the `init` command to set a unique `id`, title, and author name. Customize the branding, character names, and descriptions to suit your project. Ensure this is done before your initial release, and maintain the same project ID for any subsequent updates.
+2. Replace the four sets of videos, cover images, static frames, background images, and all dialogue (both set-specific and shared). You may also delete any sample sets you do not intend to use. Ensure that you have the legal right to distribute all content you include.
+3. Verify that `sample: false` is set in all `look.json` files. Once all sample content has been removed, set `sample` to `false` in `content/project.json`. Simply changing this flag is not a substitute for replacing the actual assets; the tools will verify the registered files and dialogue fingerprints.
+4. Review the content rating and other host-specific properties for Wallpaper Engine (WE). The template configuration is located at `src/hosts/wallpaper-engine.json` and does not include the original author's Workshop ID. Please select the appropriate content rating based on your actual content; the template does not determine this for you.
+5. Follow the instructions in `TESTING.md` to perform checks and preview your project within the target wallpaper software. Confirm that the cover image, audio, scaling, and looping behavior all function as expected.
 ```powershell
 python -X utf8 tools/project.py check --media
 python -X utf8 tools/project.py pack --host wallpaper-engine --name my-wallpaper-we-v1
 python -X utf8 tools/project.py pack --host lively --name my-wallpaper-lively-v1
 ```
+Each ZIP file contains the entry point and host-specific metadata directly in its root directory, without any additional nested folders. A `manifest` file is included, listing all files along with their SHA256 checksums. Existing packages with the same name will not be overwritten; please use a new package name when releasing an update.
 
-每个 ZIP 都在根目录直接放入口与宿主元数据，不多套一层目录。旁边的 manifest 记录文件清单及 SHA256。已有同名包不会覆盖；更新时使用新的包名。
+WE (Wallpaper Engine): Extract the new package and create a new "Web" wallpaper in the Wallpaper Engine editor, pointing to `index.html`. Verify the title, cover image, and properties before publishing manually. New projects are assigned a unique Workshop ID by the host platform; you cannot reuse or copy another user's `workshopid`. When updating your own existing work, ensure you use your original project and Workshop ID. This tool does not handle the upload process, nor does it overwrite the directories currently in use by the host application.
 
-WE：解压新包，在 Wallpaper Engine 编辑器中以 `index.html` 创建新的网页壁纸；核对标题、封面和属性后由你手动发布。新作品由宿主分配新的工坊身份，不能复制别人的 `workshopid`。更新自己已有作品时使用自己的宿主项目与工坊身份；本工具不替你上传，也不覆盖宿主现用目录。
+Lively: Select the ZIP file via the "Add Wallpaper" option; the entry point for metadata is `LivelyInfo.json`. The package contains only the wallpaper content—it does not include the Lively software, the installer, or user-specific configurations.
 
-Lively：在“添加壁纸”中选 ZIP，元数据入口是 `LivelyInfo.json`。只提供内容包，不包含 Lively 软件、安装器或用户配置。
+The code is licensed under 0BSD. When creating and publishing your own work, you are not required to provide attribution, mention the original author, add watermarks, or include links back to the original project. Furthermore, you are not obligated to retain the copyright notice or license text from this project in your derivative source code or distributed packages. A copy of the license is included with the tool for your reference; however, any third-party components remain subject to their respective licenses.
 
-代码采用 0BSD。制作和发布自己的作品时，无需在界面、视频、发布简介中署名、@ 原作者、添加水印或放原项目链接，也不强制在衍生源码或发布包中保留本项目的版权声明和许可文本。工具默认附带许可说明，方便查阅；第三方组件仍需遵循各自许可。
+Creators are solely responsible for their derivative works, including any new content, rights to the assets used, publication, ongoing management, and user support. The use of this project's code does not imply that the original author has participated in, produced, collaborated on, or endorsed your work. You should define your own licensing terms for the assets you include; the asset information provided in this template applies only to the template's example content and does not constitute a licensing guarantee for any new assets you add.
 
-衍生作品由制作者独立负责，包括新增内容、素材权利、发布、运营与售后。使用本项目代码不代表原作者参与、出品、合作或认可该作品。你的素材应另行说明自己的授权规则；模板的素材说明仅针对模板示例，不替你给新素材作授权保证。
+## Sharing the Template Source Code
 
-## 分享模板源码
-
-本模板使用仓库名 `frac-interactive-wallpaper`，展示标题为「FRAC_桌面互动壁纸 · 开源 DIY 模板」。壁纸在宿主中的名称由 `content/project.json` 的 `title` 控制，当前为「FRAC_桌面互动壁纸」。
+This template is hosted in a repository named `frac-interactive-wallpaper`, with the display title: "FRAC_Interactive Desktop Wallpaper · Open-Source DIY Template." The name of the wallpaper as it appears in the host application is controlled by the `title` field in `content/project.json`; it is currently set to "FRAC_桌面互动壁纸" (FRAC_Desktop Interactive Wallpaper).
 
 ```powershell
 python -X utf8 tools/project.py source
 ```
 
-生成 `dist/purple-diy-source.zip`。工具仅收录明确的源码入口、开发文档、工具和配置引用的素材；不会收录 `.git`、`.history`、`.qa`、`node_modules`、预览、导出包或未引用的原视频。仍应自己检查新增的源码、文档中是否含私人信息。
+This command generates `dist/purple-diy-source.zip`. The tool includes only explicitly referenced source entry points, development documentation, tools, and assets cited in the configuration. It excludes `.git`, `.history`, `.qa`, `node_modules`, preview files, exported packages, and unreferenced raw video files. You should still manually verify that any new source code or documentation does not contain private information.
 
-本模板不携带原工程的 Git 历史或远程地址。创建自己的公开仓库时，从这个独立目录开始，检查 `.gitignore`，确保视频是实际文件而非本机硬链接或缺失的大文件指针，再提交。以后如果素材增多、仓库过大，可以另做素材下载方案；首版四段样片不需要依赖外部盘符。
+This template does not include the Git history or remote repository references from the original project. When creating your own public repository, start from this standalone directory, review the `.gitignore` file, and ensure that the video files are actual files—rather than local hard links or pointers to missing large files—before committing. If the number of assets grows and the repository becomes too large, you may implement a separate asset-downloading solution; the initial version, containing four sample clips, does not require dependencies on external drives or volumes.
 
-公开远程仓库、推送和上传均是另外的主动操作。本模板的构建、打包命令不会执行这些动作。
+Publishing to a remote repository, pushing, and uploading are separate, deliberate actions. The build and packaging commands in this template do not perform these operations.
