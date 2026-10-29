@@ -1,21 +1,21 @@
-# 角色设定模板
+# Character Profile Template
 
-这是创作资料，不由播放器读取。可以交给 AI 填写，再据此改对白与作品配置。请使用你有权创作及发布的角色与素材。
+This is creative reference material and is not read by the playback engine. You may have an AI fill this out, then use it to refine the dialogue and scene configuration. Please ensure you have the rights to create and publish the characters and assets used.
 
-- 角色名字与称呼：
-- 年龄与人物背景：
-- 与用户的关系、相处阶段：
-- 性格：怎样关心别人、怎样表达喜欢、害羞或疲惫时怎样说话？
-- 日常说话习惯：句子长短、是否使用括号动作、常用和避免的措辞。
-- 情绪价值：希望用户感受到怎样的陪伴，而不是一味夸奖或空泛承诺？
-- 不希望出现的内容：
+- Character Name and Forms of Address:
+- Age and Background:
+- Relationship with the User and Current Stage of the Relationship:
+- Personality: How does she show care for others? How does she express affection? How does she speak when she is shy or tired?
+- Daily Speech Habits: Sentence length, use of parenthetical action descriptions, preferred vocabulary, and terms to avoid.
+- Emotional Value: What kind of companionship should the user experience? (Focus on meaningful connection rather than just empty praise or vague promises.)
+- Content to Avoid:
 
-每套穿搭另外补充：
+For each outfit, please also provide:
 
-- 她今天为什么以这身打扮来陪用户？
-- 此刻的状态：放松、认真、俏皮、困倦，还是有一点期待？
-- 哪些感受来自材质、姿态、场景和当天心情？不要求每句都提衣服。
-- 她会怎样邀请用户参与，而不是独自讲一长串琐事？
-- 入场第一句话与停下来后的接话怎样自然衔接？
+- Why did she choose this specific outfit to wear while spending time with the user?
+- Current State: Is she relaxed, serious, playful, sleepy, or perhaps a bit expectant?
+- Sensory Details: What feelings arise from the materials, her posture, the setting, or her mood that day? (Note: You do not need to mention the clothing in every single line.)
+- Engagement: How does she invite the user to participate, rather than simply monologuing about trivial matters?
+- Flow: How can the opening line (upon entering) and the follow-up lines (after a pause) be connected naturally?
 
-对白以短句和自然语感为主。保持每套情境的区别，不把所有服装只换一个名字套同一组句子。先读已批准对白，再增写或替换。
+Dialogue should consist primarily of short sentences with a natural, conversational tone. Ensure each scenario remains distinct—do not simply swap the names of outfits while using the same set of lines for all of them. Review any pre-approved dialogue before adding new content or making replacements.
