@@ -5,12 +5,12 @@
   const tip = document.createElement('div');
   tip.id = 'interactionTip'; tip.className = 'interaction-tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true;
   document.body.append(tip);
-  document.getElementById('immerseButton').setAttribute('aria-label', '隐藏界面，进入沉浸模式');
+  document.getElementById('immerseButton').setAttribute('aria-label', 'Hide interface and enter immersive mode');
   let active = null, timer = 0;
   function label(button) {
-    if (button.id === 'islandShuffle') return '随机换一套';
-    if (button.id === 'immerseButton') return '隐藏界面，进入沉浸';
-    if (button.id === 'settingsButton') return button.getAttribute('aria-expanded') === 'true' ? '关闭设置' : '打开设置';
+    if (button.id === 'islandShuffle') return 'Randomly switch outfits';
+    if (button.id === 'immerseButton') return 'Hide interface and enter immersive mode';
+    if (button.id === 'settingsButton') return button.getAttribute('aria-expanded') === 'true' ? 'Close settings' : 'Open settings';
     return button.getAttribute('aria-label') || button.dataset.controlHint || '';
   }
   function suppressNativeTitle(button) {
