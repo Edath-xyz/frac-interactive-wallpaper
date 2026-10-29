@@ -1,6 +1,6 @@
-# 检查与常见问题
+# Checks and FAQ
 
-## 检查顺序
+## Check Sequence
 
 ```powershell
 python -X utf8 tools/project.py doctor
@@ -10,43 +10,43 @@ python -X utf8 tools/project.py build --host both
 python -X utf8 -m unittest discover -s tests -p "test_*.py" -v
 ```
 
-`check` 检查 ID、默认款、分组、重复编号、路径、时间范围、素材存在和对白配对。`check --media` 进一步用 ffprobe 读取实际帧数、分辨率、编码、时长和帧率；它不扫描黑帧，也不能判断动作是否适合循环。
+The `check` command validates IDs, default variants, groupings, duplicate numbering, file paths, time ranges, the existence of media assets, and dialogue pairing. `check --media` goes further, using `ffprobe` to read actual frame counts, resolutions, encodings, durations, and frame rates; however, it does not scan for black frames, nor can it determine whether the motion is suitable for looping.
 
-Python 测试复制项目到 `.qa` 下的中文／空格临时目录，生成自有测试视频，验证新增、替换、对白、画质、删除、打包与源码重新解压构建。不会修改你的 content。媒体工作流需要 FFmpeg 和 `requirements-media.txt` 中的 Pillow；缺少依赖时显示 skipped，不要把 skipped 当通过。
+The Python test suite copies the project into a temporary directory (with Chinese characters/spaces in the path) under `.qa`, generates test videos, and verifies core functionality: adding/replacing assets, dialogue, image quality, deletion, packaging, and rebuilding from the source. Your original `content` remains unmodified. The media workflow requires FFmpeg and the `Pillow` library (listed in `requirements-media.txt`); if dependencies are missing, tests will be marked as "skipped"—do not mistake "skipped" for "passed."
 
-浏览器测试：
+Browser-based tests:
 
 ```powershell
 npm ci --ignore-scripts
 npm run test:browser
 ```
 
-读取当前配置，使用独立 Chrome 配置直接打开本地 HTML；实际解码视频，检查入场定格、动态循环、切衣橱仅浏览、排序、精简布局，以及两个适配页面的暂停通知。日志与截图在 `.qa/browser-<时间>`。此检查不是原生 WE/Lively 桌面验收，不测真实听音或所有设备的顺滑度。
+This process reads your current configuration and opens the local HTML file using a dedicated Chrome profile. It performs actual video decoding to verify features such as initial freeze-frames, dynamic loops, wardrobe-switching (preview mode), sorting, the "compact" layout, and the pause notifications for specific page adaptations. Logs and screenshots are saved in `.qa/browser-<timestamp>`. Note that this is not a native validation for WE (Wallpaper Engine) or Lively Desktop; it does not test actual audio playback or performance smoothness across all hardware.
 
-手工最终检查：在目标软件导入后播放每类素材，测试手动暂停后系统恢复、锁屏回来、桌面点击、音量和自己的屏幕比例。更换解码器或宿主版本后重新确认。
+Final manual check: After importing the project into the target software, play each type of asset. Test system behavior following manual pauses, returning from a locked screen, clicking on the desktop, adjusting volume, and ensuring compatibility with your specific screen aspect ratio. Re-verify whenever you change the decoder or the host software version.
 
-## 常见问题
+## FAQ
 
-**打开 HTML 是黑屏或缺封面**：先运行 build，打开 preview 下完整目录中的 index.html，不能只复制单个 HTML。运行 check 查看缺失路径。仓库中的四个 WebM 是实际文件，拉取后如果缺失应恢复对应素材，不要生成空文件绕过校验。
+**The HTML displays a black screen or is missing a cover image:** Ensure you have run the `build` command, then open the `index.html` file located within the full directory under `preview`—do not simply copy an individual HTML file. Run `check` to identify any missing file paths. The four WebM files in the repository are actual assets; if they are missing after a pull, please restore the original files rather than creating empty placeholder files to bypass validation.
 
-**视频有画面但无声音**：检查源视频是否有音轨、页面音量与静音状态；浏览器首次播放可能需要主动点击。网页运行状态与实际宿主听音要分别确认。
+**Video has visuals but no sound**: Check if the source video contains an audio track, and verify the page volume and mute settings. Note that browsers may require a user interaction (a click) before audio can play. Ensure that the audio is audible within the actual host environment, not just the web page itself.
 
-**循环每次又从入场开始**：确认 kind 为 companion，loopStart/loopEnd 真实有效，当前模式是动态陪伴。单套循环会完整重播视频，是另一个模式。
+**Loop restarts from the beginning every time**: Confirm that the `kind` is set to `companion`, that `loopStart` and `loopEnd` are correctly configured, and that the mode is set to "dynamic companion." A standard loop mode will replay the entire video from the start; this is a different behavior.
 
-**循环点不自然**：工具只能验证时间范围。检查起点与终点的姿势、视线、光线和动作衔接；不要靠增加对白延时掩盖视频问题。
+**Unnatural loop transitions**: The tool can only validate time ranges. Manually check the pose, gaze, lighting, and motion continuity between the start and end points; do not attempt to mask issues by simply adding delays to the dialogue.
 
-**改 JSON 没变化**：重新 build，关闭旧预览再打开；不要直接编辑 preview。名字改了但设置仍保留是正常现象，作品 ID 才决定存储身份。
+**Changes to JSON not reflected**: Rebuild the project and restart the preview; do not edit the preview files directly. It is normal for settings to persist even if a name is changed, as the "work ID" is what uniquely identifies the asset.
 
-**删一套后收藏错位**：正常流程按 catalogIds 重映射；勿删保存映射或复用旧 ID/hostValue。不要用清空全部设置作为默认修复方案。
+**Mapping errors after deleting an entry**: The system automatically remaps entries based on `catalogIds`. Do not delete saved mappings or reuse old IDs/`hostValue` entries. Avoid clearing all settings as a "default" fix.
 
-**画质按钮不是 4K**：original 指基础视频，按钮显示实际基础分辨率；本模板样片就是 1080P。自行增加真实高分辨率文件后才会有相应画质。
+**Quality button does not show 4K**: The "original" label refers to the base video file; the button displays the actual resolution of that base file. The sample assets provided in this template are 1080p. Options for higher resolutions will only appear once you add actual high-resolution files.
 
-**ffmpeg/ffprobe 找不到**：安装 FFmpeg 后添加其 bin 目录到 PATH，重开终端。构建已有样片仍可运行，新增／替换与媒体检查需要这些工具。
+**`ffmpeg`/`ffprobe` not found**: Install FFmpeg, add its `bin` directory to your system PATH, and restart your terminal. While the project can still build using the existing samples, these tools are required for adding/replacing assets and performing media validation.
 
-**Chrome 启动失败**：检查 Node 版本与 npm ci 是否成功；设置 PURPLE_CHROME 指向 Chrome。在受限运行环境中可能需要允许启动隔离测试进程；不要把个人浏览器配置路径拿来测试。
+**Chrome fails to launch**: Verify your Node.js version and ensure `npm ci` completed successfully. Use the `PURPLE_CHROME` environment variable to point to your Chrome executable. In restricted environments, you may need to grant permission to launch isolated test processes; do not use your personal browser profile path for testing.
 
-**需要 HTTP 检查**：运行 `node tools/serve.cjs`，它只监听本机随机端口，并输出实际地址，支持视频 Range。可通过 `PURPLE_HOST=lively` 选择另一个构建目录。不要用缺少 Range 的简易服务器判断定格是否正常；结束后 Ctrl+C 关闭。
+**HTTP validation required**: Run `node tools/serve.cjs`. This will listen on a random local port and output the access URL; it supports HTTP Range requests for video. You can specify a different build directory by setting `PURPLE_HOST=lively`. Do not use a basic server that lacks `Range` request support to verify if the output is rendered correctly; press `Ctrl+C` to shut down the server when finished.
 
-**发布命令拒绝样片**：按 CONTENT-LICENSE.md 替换受限内容。不要修改样片指纹或用 demo 包绕过。纯学习预览可使用 pack --demo。
+**Prohibition on using sample assets in published builds:** Replace any restricted content as per `CONTENT-LICENSE.md`. Do not alter the fingerprints of sample assets or attempt to bypass restrictions by including the `demo` package. For previewing/learning purposes only, you may use the `pack --demo` command.
 
-**误操作想恢复**：查看 `.history/<时间>/content` 中的备份。先比较要恢复的 look 文件夹、wardrobes.json 和 project.json；恢复完整相关配置后重新 check/build，勿用旧备份覆盖其他较新修改。
+**Recovering from an accidental change:** Check the backups located in `.history/<timestamp>/content`. Before proceeding, compare the relevant `look` folder, `wardrobes.json`, and `project.json` files. Once the configuration has been properly restored, run `check` or `build` again. Ensure that you do not overwrite newer, intentional modifications with older backup files.
