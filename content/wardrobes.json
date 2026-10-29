@@ -1,7 +1,7 @@
 [
   {
     "id": "classic",
-    "name": "咫尺偏爱",
+    "name": "A Touch Away",
     "english": "CLOSER, TOGETHER",
     "defaultLook": "classic-sample",
     "background": "content/backgrounds/empty.jpg",
@@ -11,7 +11,7 @@
   },
   {
     "id": "sit",
-    "name": "片刻倾心",
+    "name": "A Moment of Affection",
     "english": "A SEAT IN PURPLE",
     "defaultLook": "sit-sample",
     "background": "content/backgrounds/empty-purple.jpg",
@@ -22,7 +22,7 @@
   },
   {
     "id": "recline",
-    "name": "慵懒依偎",
+    "name": "Lazy Embrace",
     "english": "SLOW AFTERNOONS",
     "defaultLook": "recline-sample",
     "background": "content/backgrounds/empty-purple.jpg",
