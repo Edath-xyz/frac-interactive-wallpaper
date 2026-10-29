@@ -11,7 +11,7 @@
   const guide = document.createElement('div');
   guide.className = 'layout-guide'; guide.hidden = true;
   guide.setAttribute('aria-hidden', 'true');
-  guide.innerHTML = '<span>左侧界面对齐线</span>';
+  guide.innerHTML = '<span>Left-side interface alignment guide</span>';
   body.append(guide);
   let savedRatio = 0, draftRatio = 0, offset = 0, editing = false, resizeFrame = 0;
   let savedVertical = 0, draftVertical = 0, verticalOffset = 0;
@@ -21,7 +21,7 @@
     const value = record.offsetRatio;
     if (Number.isFinite(value)) savedRatio = Math.max(-.25, Math.min(.25, value));
   } catch (_) {}
-  const label = pixels => Math.abs(pixels) < 1 ? '默认位置' : `${pixels > 0 ? '右移' : '左移'} ${Math.abs(pixels)} px`;
+  const label = pixels => Math.abs(pixels) < 1 ? 'Default position' : `${pixels > 0 ? 'Move right' : 'Move left'} ${Math.abs(pixels)} px`;
   function bounds() {
     const width = root.clientWidth;
     const card = wardrobe.getBoundingClientRect();
@@ -38,7 +38,7 @@
     }
     return {min:Math.min(0, Math.ceil(16 - baseLeft)), max:Math.max(0, Math.floor(max))};
   }
-  const verticalLabel = pixels => Math.abs(pixels) < 1 ? '默认位置' : `${pixels > 0 ? '下移' : '上移'} ${Math.abs(pixels)} px`;
+  const verticalLabel = pixels => Math.abs(pixels) < 1 ? 'Default position' : `${pixels > 0 ? 'Move down' : 'Move up'} ${Math.abs(pixels)} px`;
   function syncGuides() {
     const visible = !settings.hidden && !$('settingsBody').hidden && $('resetConfirm').hidden && $('personalizationOptions').open;
     guide.hidden = !visible;
@@ -88,8 +88,8 @@
     $('layoutLeft').disabled = offset <= min;
     $('layoutRight').disabled = offset >= max;
     $('layoutNote').textContent = max - min < 40
-      ? '当前屏幕的留白较窄，可移动范围已收拢。'
-      : '左侧整列一起移动，为桌面图标留出空位。';
+      ? 'The available space on the current screen is narrow, so the movable range has been reduced.'
+      : 'Move the entire left column together to leave space for desktop icons.';
   }
   function finish(save, focus = true) {
     if (!editing) { syncGuides(); return; }
