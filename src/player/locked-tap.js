@@ -5,7 +5,7 @@
     if (now - lastPrivateReply < 1500) return;
     lastPrivateReply = now;
     if (LOOKS[index].silent) {
-      toast('暂未开放', LOOKS[index].name);
+      toast('Not yet open', LOOKS[index].name);
     } else {
       privateVisits++;
       const aside = privateVisits >= 4 && now - lastPrivateAside >= 90000;
