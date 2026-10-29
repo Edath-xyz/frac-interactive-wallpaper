@@ -1,83 +1,80 @@
-# FRAC_桌面互动壁纸 · 开源 DIY 模板
+# FRAC_ Interactive Desktop Wallpaper · Open-Source DIY Template
 
-三个衣橱、四段 1080P 样片，保留入场定格、动态陪伴、顺序／随机轮播、收藏、自选定格、经典／精简布局。可导出 Wallpaper Engine 网页项目与 Lively 导入 ZIP，运行时完全离线。
+Features three closets and four 1080P sample clips. Includes options for entry-sequence freeze-frames, dynamic "companion" sequences, sequential or random playback, a favorites system, custom freeze-frame selection, and a choice between "classic" or "minimalist" layouts. Projects can be exported for use in Wallpaper Engine (as web-based projects) or as ZIP files for import into Lively Wallpaper; the software runs entirely offline.
 
-**代码采用 0BSD，可修改、商用和发布，无需署名原作者；附带的视频、图片和示例对白仅供个人学习、本地预览，发布自己的作品前必须替换。** 见 [代码许可](LICENSE) 与 [示例内容说明](CONTENT-LICENSE.md)。
+**The code is licensed under 0BSD, allowing for modification, commercial use, and redistribution without the need for attribution. Please note that the included videos, images, and sample dialogue are provided solely for personal study and local preview purposes; they must be replaced before you publish your own work.** See the [Code License](LICENSE) and [Sample Content Notice](CONTENT-LICENSE.md) for details.
 
-用代码制作自己的作品时，不需要在壁纸界面、视频或发布简介里提到 FRAC_LAB，也不需要 @、添加水印或放原项目链接。0BSD 同样不要求在衍生源码或发布包中保留本项目的版权声明、许可文本；第三方组件仍遵循各自许可。
+When creating your own projects using this code, you are not required to mention FRAC_LAB within the wallpaper interface, the videos, or your project descriptions. There is no obligation to tag the original creators, add watermarks, or include links back to this repository. Under 0BSD, you are also not required to retain the original copyright notice or license text in your derivative source code or distribution packages. (Note: Third-party components remain subject to their respective licenses.)
 
-衍生作品由制作者独立制作和发布，其内容、素材权利、运营与售后由制作者负责。使用本项目代码不代表原作者参与、出品、合作或认可该作品；软件按许可原样提供，不提供质量或适用性保证。
+Derivative works are created and published independently by their respective authors, who assume full responsibility for the content, assets, operation, and user support. The use of this code does not imply that the original authors have participated in, produced, endorsed, or partnered with your project. The software is provided "as is," without any guarantees regarding quality or fitness for a particular purpose.
 
-![精简布局下的衣橱、播放控制和对白示例](docs/images/interface-preview.png)
+![Closet interface, playback controls, and sample dialogue (minimalist layout)](docs/images/interface-preview.png)
 
-上图为模板的实际预览：在衣橱中挑选穿搭，控制入场、定格与动态陪伴。界面截图同样属于受限示例内容。
+The image above shows a preview of the template in action: select outfits from the closets, and control entry sequences, freeze-frames, and dynamic companion segments. (The interface screenshot itself is also considered restricted sample content.)
 
-## 第一次使用
+## Getting Started
 
-下载或克隆本仓库后，保留完整 `content` 文件夹。四个样片直接包含在源码中，无需另找网盘，也没有 Git LFS 指针。需要 Python 3.11+；只构建已有样片无需 Node.js 或 FFmpeg。
-
-在项目根目录打开终端：
+After downloading or cloning this repository, ensure the `content` folder remains intact. The four sample clips are included directly within the source code—no need to download them from external cloud storage, and no Git LFS pointers are used. Python 3.11+ is required. If you are simply building the project using the existing sample clips, you do not need to install Node.js or FFmpeg. Open a terminal in the project root directory:
 
 ```powershell
 python -X utf8 tools/project.py doctor
 python -X utf8 tools/project.py build --host both
 ```
 
-直接打开 `preview/wallpaper-engine/index.html` 即可预览。`preview/lively/index.html` 是 Lively 适配版本。浏览器可能要求第一次手动点击才能播放声音，这不代表音轨缺失。
+Open `preview/wallpaper-engine/index.html` directly to preview. `preview/lively/index.html` is the version adapted for Lively. Your browser may require a manual click to enable audio playback; this does not mean the audio tracks are missing.
 
-需要在宿主内试用示例时：
+To test the samples within their respective host applications:
 
 ```powershell
 python -X utf8 tools/project.py pack --host wallpaper-engine --demo
 python -X utf8 tools/project.py pack --host lively --demo
 ```
 
-包在 `dist`。WE 包解压后选择里面的 `index.html` 创建网页壁纸；Lively 直接添加 ZIP。**两个 demo 包均只供本地预览，不可作为自己的作品发布。** 同名包不会被覆盖，再导出时加 `--name my-demo-v2`。
+The packages can be found in the `dist` directory. For Wallpaper Engine (WE), extract the package and select the `index.html` file within it to create a web-based wallpaper; for Lively, simply add the ZIP file. **Both demo packages are intended for local preview purposes only and must not be published as your own work.** Existing packages will not be overwritten; to export again, use the `--name my-demo-v2` flag.
 
-## 样片
+## Samples
 
-| 稳定 ID / 文件夹 | 名称 | 衣橱 | 类型与关键时间 |
+| Stable ID / Folder | Name | Wardrobe | Type & Key Timestamp |
 | --- | --- | --- | --- |
-| `classic-sample` | 薄纱晚风 | 咫尺偏爱 | 入场，11.23 秒定格 |
-| `sit-sample` | 簪花小令 | 片刻倾心 | 入场与离场，6.8 秒定格 |
-| `sit-companion` | 靛蓝晚风 | 片刻倾心 | 动态陪伴，8 秒起循环 |
-| `recline-sample` | 紫暮长靴 | 慵懒依偎 | 入场，11.7 秒定格 |
+| `classic-sample` | Sheer Evening Breeze | Close Affection | Entrance, freeze-frame at 11.23s |
+| `sit-sample` | Floral-Adorned Verse | Fleeting Infatuation | Entrance and exit, freeze-frame at 6.8s |
+| `sit-companion` | Indigo Evening Breeze | Fleeting Infatuation | Dynamic companion, loops from 8s |
+| `recline-sample` | Purple Twilight Boots | Lazy Cuddle | Entrance, freeze-frame at 11.7s |
 
-四套各一段基础视频，均为 1920×1080 / 60 FPS。动态样片保留 10 条持续对白；其他类别只保留少量完整示例。封面、定格图和两个场景背景另外提供。
+Each of the four sets includes a base video (1920×1080 / 60 FPS). The dynamic samples retain 10 continuous lines of dialogue, while other categories include a small selection of complete examples. Cover images, freeze-frame stills, and two scene backgrounds are provided separately.
 
-## 开始自己的作品
+## Creating Your Own Work
 
-先创建独立作品身份。第一次命令展示计划，确认内容后加 `--apply` 执行：
+Begin by establishing a unique identity for your project. The first command displays the project plan; once you have reviewed the content, append `--apply` to execute it:
 
 ```powershell
-python -X utf8 tools/project.py init --id my-companion --title "我的桌面陪伴" --author "我的名字"
-python -X utf8 tools/project.py init --id my-companion --title "我的桌面陪伴" --author "我的名字" --apply
+python -X utf8 tools/project.py init --id my-companion --title "My Desktop Companion" --author "My Name"
+python -X utf8 tools/project.py init --id my-companion --title "My Desktop Companion" --author "My Name" --apply
 ```
 
-继续按 [视频指南](docs/MEDIA.md) 换入自己有权使用的素材，按 [对白指南](docs/DIALOGUE.md) 修改文字。作品名字、品牌、角色称呼和默认设置统一在 `content/project.json`。衣橱名称、顺序和背景在 `content/wardrobes.json`。
+Follow the [Video Guide](docs/MEDIA.md) to swap in your own authorized assets, and refer to the [Dialogue Guide](docs/DIALOGUE.md) to modify the text. Project name, branding, character names, and default settings are all managed in `content/project.json`. Wardrobe categories, their order, and background settings are defined in `content/wardrobes.json`.
 
-## 交给本地 AI
+## Handing Off to a Local AI
 
-把仓库文件夹交给支持读取本地文件的 AI，直接发送：
+Provide the repository folder to an AI capable of reading local files, and send the following prompt:
 
-> 请先阅读 README.md、AGENTS.md 和与任务相关的 docs 文档。我要在这个模板上制作自己的壁纸。先说明现有四套素材、配置入口和当前检查结果，再按我提供的视频与对白修改。保留播放器的播放与暂停逻辑；需要我确定定格点、循环点或离场类型时列出缺失信息。完成修改后构建并执行相关检查，给我本地预览入口和验证结果。未经要求不要上传、创建远程仓库或改动其他项目。
+> Please begin by reading the README.md, AGENTS.md, and the relevant documentation in the `docs/` folder. I intend to create my own desktop companion using this template. Start by summarizing the four existing asset sets, the configuration entry points, and the current validation status. Then, proceed to modify the content based on the videos and dialogue I provide. Maintain the existing play/pause logic for the media player; if you require input from me—such as defining freeze-frames, loop points, or exit behaviors—please list the missing information. Once the modifications are complete, build the project, run the necessary checks, and provide me with a local preview link and the validation results. Do not upload any files, create remote repositories, or alter any other projects unless explicitly requested.
 
-具体任务提示词见 [AI 接手示例](docs/AI_TASKS.md)。角色创作资料见 [角色设定模板](docs/PERSONA.md)。
+For specific task prompts, see [AI Task Examples](docs/AI_TASKS.md). For character creation materials, see the [Persona Template](docs/PERSONA.md).
 
-## 查阅入口
+## Reference Guides
 
-- [配置与架构](docs/ARCHITECTURE.md)：每个文件负责什么，稳定 ID 与保存机制。
-- [视频 DIY](docs/MEDIA.md)：新增、替换、离场、循环、封面与画质。
-- [对白 DIY](docs/DIALOGUE.md)：成对接话、持续陪伴、亲昵和共享回应。
-- [检查与常见问题](docs/TESTING.md)：自动检查、浏览器和桌面宿主验收边界。
-- [发布自己的作品](docs/PUBLISH.md)：素材替换检查、WE/Lively 导出、源码公开。
-- [版本验证记录](docs/VERIFICATION.md)：本版本实际完成的验证与限制。
+- [Configuration & Architecture](docs/ARCHITECTURE.md): Explains the purpose of each file, stable IDs, and the save mechanism.
+- [Video DIY](docs/MEDIA.md): Covers adding/replacing assets, exit behaviors, looping, cover images, and video quality.
+- [Dialogue DIY](docs/DIALOGUE.md): Covers conversational exchanges, ongoing companionship, intimate interactions, and shared responses.
+- [Testing & FAQ](docs/TESTING.md): Details automated checks and acceptance criteria for browser and desktop host environments. - [Publishing Your Work](docs/PUBLISH.md): Asset replacement checks, exporting for Wallpaper Engine/Lively, and open-sourcing your source code.
+- [Verification Records](docs/VERIFICATION.md): Details on the actual verification performed and any limitations for this version.
 
-## 开发环境
+## Development Environment
 
-视频新增／替换需要 FFmpeg（`ffmpeg` 和 `ffprobe` 在 PATH），并执行 `python -m pip install -r requirements-media.txt` 安装截图处理依赖 Pillow。已有样片的构建无需安装它。所有工具使用参数数组调用，不运行输入文件里的指令，原视频只读；修改前的文件保存在 `.history`。
+Adding or replacing video assets requires FFmpeg (with `ffmpeg` and `ffprobe` in your system PATH). You must also install Pillow—a dependency for processing screenshots—by running `python -m pip install -r requirements-media.txt`. This step is not required if you are simply building from existing sample assets. All tools are invoked using argument arrays; no commands embedded within input files are executed, and original video files are accessed in read-only mode. Files are backed up to the `.history` directory before any modifications are made.
 
-浏览器自动检查另外需要 Node.js 22.12+ 和本机 Chrome：
+Automated browser-based checks require Node.js 22.12+ and a local installation of Google Chrome:
 
 ```powershell
 npm ci --ignore-scripts
@@ -85,6 +82,6 @@ npm test
 npm run test:browser
 ```
 
-`puppeteer-core` 不下载浏览器；Chrome 不在标准位置时，用环境变量 `PURPLE_CHROME` 指向可执行文件。检查使用独立配置，不读取或清除个人浏览器偏好。
+`puppeteer-core` does not download a browser automatically. If Chrome is not installed in a standard location, use the `PURPLE_CHROME` environment variable to point to the executable file. These checks use an isolated configuration and do not read or clear your personal browser preferences.
 
-运行壁纸不需要这些开发工具。不要把 `node_modules`、`.history`、`.qa` 或原始大视频一起塞进壁纸包。
+These development tools are not required to run the wallpapers. Please ensure that `node_modules`, `.history`, `.qa`, or large raw video files are not included in your final wallpaper package.
