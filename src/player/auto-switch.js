@@ -1,4 +1,4 @@
-  let customIntervalOpen = false, draftIntervalUnit = 'seconds';
+let customIntervalOpen = false, draftIntervalUnit = 'seconds';
   const autoSwitchDisabled = () => cycling() && !companionMode();
   const hasHeldDeparture = () => !companionClip() && Boolean(LOOP_SEAMS[LOOKS[current].id]);
   let companionAutoClock = {key: '', elapsed: 0, deck: null, time: 0, round: 0};
@@ -117,9 +117,9 @@
   function isPresetInterval(minutes) { return [0, .25, 5, 15].includes(minutes); }
   function intervalUnit(minutes) { return Math.round(minutes * 60) % 60 ? 'seconds' : 'minutes'; }
   function formatAutoInterval(minutes) {
-    if (!minutes) return '关闭';
+    if (!minutes) return 'Off';
     const seconds = Math.round(minutes * 60);
-    return seconds % 60 ? `每隔 ${seconds} 秒` : `每隔 ${seconds / 60} 分钟`;
+    return seconds % 60 ? `Every ${seconds} seconds` : `Every ${seconds / 60} minutes`;
   }
   function renderCustomIntervalAction() {
     const value = Number($('customInterval').value);
@@ -129,7 +129,7 @@
       Number.isInteger(value) && value >= 1 && value <= max &&
       draftIntervalUnit === prefs.customIntervalUnit && seconds === Math.round(prefs.interval * 60);
     const button = $('applyCustomInterval');
-    button.textContent = applied ? '已应用' : '应用';
+    button.textContent = applied ? 'Applied' : 'Apply';
     button.dataset.applied = String(applied);
     button.disabled = autoSwitchDisabled() || applied;
   }
@@ -159,11 +159,11 @@
     $('autoLoopNote').hidden = !disabled;
     const pool = companionMode() ? companionAutoPool() : [];
     $('autoTimingNote').textContent = companionMode()
-      ? !pool.length ? '当前范围没有动态陪伴穿搭，定时换装暂停。可点亮动态款的爱心，或改选「本组全部」。'
-      : pool.length === 1 && pool[0] === current ? '当前范围只有这一套动态陪伴，保持当前穿搭。'
-      : '仅在本组动态陪伴穿搭中换装。入场后计时，到点等本轮结束再换；暂停或操作面板时暂停计时。'
-      : hasHeldDeparture() ? '从定格开始计时，停留满所选时长后，先播放离场再换装。'
-      : '从定格开始计时，停留满所选时长再换装。';
+      ? !pool.length ? 'There are no dynamic companion outfits in the current scope, so timed outfit switching is paused. Favorite a dynamic outfit or select “All in this group”.'
+      : pool.length === 1 && pool[0] === current ? 'Only this dynamic companion outfit is available in the current scope. Keeping the current outfit.'
+      : 'Switches only among dynamic companion outfits in this group. The timer starts after entry, and the outfit changes when the current loop ends. The timer pauses during playback pauses or while an operation panel is open.'
+      : hasHeldDeparture() ? 'The timer starts from the still frame. After the selected duration, the departure animation plays before switching outfits.'
+      : 'The timer starts from the still frame. The outfit changes after the selected duration.';
     renderCustomIntervalAction();
   }
   function closeCustomInterval() {
@@ -217,7 +217,7 @@
     const input = $('customInterval'), value = Number(input.value), max = draftIntervalUnit === 'seconds' ? 3600 : 60;
     if (!Number.isInteger(value) || value < 1 || value > max) {
       input.setAttribute('aria-invalid', 'true');
-      $('autoCustomFeedback').textContent = `请输入 1–${max} 的整数${draftIntervalUnit === 'seconds' ? '秒' : '分钟'}。`;
+      $('autoCustomFeedback').textContent = `Enter a whole number from 1 to ${max} ${draftIntervalUnit === 'seconds' ? 'seconds' : 'minutes'}.`;
       $('autoCustomFeedback').hidden = false; input.focus(); return;
     }
     setAutoInterval(draftIntervalUnit === 'seconds' ? value / 60 : value, 'custom', draftIntervalUnit);
@@ -300,7 +300,7 @@
       $('curtain').style.backgroundImage = `url("images/${wardrobeFor(current).empty}")`;
       video.muted = !prefs.sound; video.volume = prefs.volume / 100;
       $('still').src = `images/look-${LOOKS[next].id}.jpg`;
-      $('still').alt = LOOKS[next].name + '穿搭推荐定格';
+      $('still').alt = LOOKS[next].name + ' outfit recommendation still';
       document.querySelector('.ambient').style.backgroundImage = `url("images/look-${LOOKS[next].id}.jpg")`;
       releaseSpare();
       updateCards(); persist(); updateProgress(0);
